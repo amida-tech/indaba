@@ -6,6 +6,9 @@
 source/builder/build
 source/builder/dist
 
+source/*/build
+source/*/dist
+
 source/common/build
 source/common/dist
 
