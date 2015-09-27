@@ -3,6 +3,8 @@
 
 .DS_Store
 
+dist/
+
 source/builder/build
 source/builder/dist
 
