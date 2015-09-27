@@ -14,7 +14,7 @@ cd source/control_panel
 ant dist -q
 cd ../..
 
-mkdir dist
+mkdir -p dist
 
 cp source/builder/dist/indaba-builder.war dist/FM31.war
 cp source/control_panel/dist/ControlPanel.war dist/ControlPanel.war
