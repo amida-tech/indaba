@@ -28,13 +28,12 @@ Folder `legacy` contains original source code of Indaba Platform.
 
 ### Build
 
-Steps to build Indaba platform:
-
 Prerequisites: Java, Ant
 
 Run build: 
 
-``` sh ./build.sh
+```
+sh ./build.sh
 ```
 
 After successfull build, `dist` folder will have three .war files: FM31.war, ControlPanel.war and Publisher.war
