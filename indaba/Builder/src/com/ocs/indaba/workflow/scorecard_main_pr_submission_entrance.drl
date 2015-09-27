@@ -1,0 +1,20 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Peer Review Started"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        taIndex: Integer()
+
+        eval(taIndex == 1)
+        eval(ta.getStatus() == Constants.TASK_STATUS_ACTIVE)
+    then
+        // System.out.println("=====<<<< REPORTPEER RVIEW START >>>>======");
+        siteMessageService.postToProjectWall(ta, Constants.NOTIFICATION_TYPE_PEER_REVIEW_START);
+end
+

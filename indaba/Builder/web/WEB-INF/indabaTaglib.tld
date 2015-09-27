@@ -1,0 +1,1022 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<!--
+    $Id: struts-html.tld 481833 2006-12-03 17:32:52Z niallp $
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>2.0</jsp-version>
+  <short-name>indaba</short-name>
+  <tag>
+    <name>access</name>
+    <tag-class>com.ocs.indaba.tag.AccessTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba Access Control
+        </description>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>right</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                right name
+            </description>
+    </attribute>
+    <attribute>
+      <name>tool</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                tool name
+            </description>
+    </attribute>
+    <attribute>
+      <name>link</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                url link
+            </description>
+    </attribute>
+    <attribute>
+      <name>text</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                the text of url link
+            </description>
+    </attribute>
+    <attribute>
+      <name>hint</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                ONLY used in case user's cursor hangs on the url link, it pops up the hint message
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+  </tag>
+  <tag>
+    <name>view</name>
+    <tag-class>com.ocs.indaba.tag.ViewTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>right</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                right name
+            </description>
+    </attribute>
+    <attribute>
+      <name>flag</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                flag(true: display only if permission is ok; false: display only if permission is NOT ok)
+            </description>
+    </attribute>
+    <attribute>
+      <name>ignore</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                ignore(true: ignore view access permission check; false: go ahead with the view access permission check. By default, if this attribute is not specified, it is false.)
+            </description>
+    </attribute>
+  </tag>
+  <tag>
+    <name>indicator</name>
+    <tag-class>com.ocs.indaba.tag.SurveyIndicatorTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>userid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>horseid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                horse id
+            </description>
+    </attribute>
+    <attribute>
+      <name>assignid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                task assignment id
+            </description>
+    </attribute>
+    <attribute>
+      <name>action</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                action name(display, view, edit, create, etc.)
+            </description>
+    </attribute>
+    <attribute>
+      <name>cntverid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                content version id
+            </description>
+    </attribute>
+    <attribute>
+      <name>returl</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                return url
+            </description>
+    </attribute>
+  </tag>
+  <tag>
+    <name>surveyTree</name>
+    <tag-class>com.ocs.indaba.tag.SurveyTreeTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>userid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>horseid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                horse id
+            </description>
+    </attribute>
+    <attribute>
+      <name>assignid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                task assignment id
+            </description>
+    </attribute>
+    <attribute>
+      <name>action</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                action name(display, view, edit, create, etc.)
+            </description>
+    </attribute>
+    <attribute>
+      <name>cntverid</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                content version id
+            </description>
+    </attribute>
+    <attribute>
+      <name>returl</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                return url
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba:taskstatus - Indaba Task Status Tag -->
+  <tag>
+    <name>taskstatus</name>
+    <tag-class>com.ocs.indaba.tag.TaskStatusTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>assignid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                task assignment id
+            </description>
+    </attribute>
+    <attribute>
+      <name>width</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                image width
+            </description>
+    </attribute>
+    <attribute>
+      <name>imgbase</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                image dir base
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba:simpleAnswer - Indaba Simple Answer Tag -->
+  <tag>
+    <name>simpleAnswer</name>
+    <tag-class>com.ocs.indaba.tag.SimpleSurveyAnswerTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba Survey answer
+        </description>
+    <attribute>
+      <name>answerType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Answer Type
+            </description>
+    </attribute>
+    <attribute>
+      <name>answerTypeId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Answer Type Id
+            </description>
+    </attribute>
+    <attribute>
+      <name>showAnswer</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                whether show answer
+            </description>
+    </attribute>
+    <attribute>
+      <name>answerObjectId</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if showAnswer, this is the answer key
+            </description>
+    </attribute>
+    <attribute>
+      <name>disabled</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if the choose or input is disabled
+            </description>
+    </attribute>
+    <attribute>
+      <name>showDefault</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                whether show default selection
+            </description>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                html name
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+    <attribute>
+      <name>contents</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                contents to edit
+            </description>
+    </attribute>
+    <attribute>
+      <name>horseId</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                horse id
+            </description>
+    </attribute>
+    <attribute>
+      <name>questionId</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                question id
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba:tableAnswer - Indaba Table Answer Tag -->
+  <tag>
+    <name>tableAnswer</name>
+    <tag-class>com.ocs.indaba.tag.TableSurveyAnswerTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba table survey answer
+        </description>
+    <attribute>
+      <name>horseId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                horse id
+            </description>
+    </attribute>
+    <attribute>
+      <name>mainQuestionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                main question id
+            </description>
+    </attribute>
+    <attribute>
+      <name>disabled</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if the choose or input is disabled
+            </description>
+    </attribute>
+    <attribute>
+      <name>contents</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                contents to edit
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba:tableAnswer - Indaba Table Answer  Version Tag -->
+  <tag>
+    <name>tableAnswerVersion</name>
+    <tag-class>com.ocs.indaba.tag.TableSurveyAnswerVersionTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba table survey answer version
+        </description>
+    <attribute>
+      <name>contentVersionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                content version id
+            </description>
+    </attribute>
+    <attribute>
+      <name>mainQuestionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                main question id
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba tableAnswerPeerReview - Indaba PeerReview Table Answer Tag -->
+  <tag>
+    <name>tableAnswerPeerReview</name>
+    <tag-class>com.ocs.indaba.tag.TableSurveyAnswerPeerReviewTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba table survey answer
+        </description>
+    <attribute>
+      <name>peerReviewId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                peerreview id
+            </description>
+    </attribute>
+    <attribute>
+      <name>mainQuestionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                main question id
+            </description>
+    </attribute>
+    <attribute>
+      <name>disabled</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if the choose or input is disabled
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba tableAnswerPeerReviewVersion - Indaba PeerReview Table Answer Version Tag -->
+  <tag>
+    <name>tableAnswerPeerReviewVersion</name>
+    <tag-class>com.ocs.indaba.tag.TableSurveyAnswerPeerReviewVersionTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba table survey answer peer review version
+        </description>
+    <attribute>
+      <name>peerReviewVersionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                peerreview version id
+            </description>
+    </attribute>
+    <attribute>
+      <name>mainQuestionId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                main question id
+            </description>
+    </attribute>
+    <attribute>
+      <name>class</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css class specified
+            </description>
+    </attribute>
+    <attribute>
+      <name>style</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                css style script
+            </description>
+    </attribute>
+  </tag>
+  <!-- indaba:source - Indaba Source Tag -->
+  <tag>
+    <name>source</name>
+    <tag-class>com.ocs.indaba.tag.SurveyReferenceTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <description>
+            Indaba Survey Source
+        </description>
+    <attribute>
+      <name>referenceType</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Reference Type
+            </description>
+    </attribute>
+    <attribute>
+      <name>referenceId</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Reference Id
+            </description>
+    </attribute>
+    <attribute>
+      <name>showAnswer</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                whether show answer
+            </description>
+    </attribute>
+    <attribute>
+      <name>referenceObjectId</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if showAnswer, this is answer key
+            </description>
+    </attribute>
+    <attribute>
+      <name>disabled</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                if the choose or input is disabled
+            </description>
+    </attribute>
+    <attribute>
+      <name>name</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                html name
+            </description>
+    </attribute>
+    <attribute>
+      <name>contents</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                contents to edit
+            </description>
+    </attribute>
+  </tag>
+  <!-- Filter Tag -->
+  <tag>
+    <name>filter</name>
+    <tag-class>com.ocs.indaba.tag.FilterTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                name
+            </description>
+    </attribute>
+    <attribute>
+      <name>selectedIds</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                array of the selected ids
+            </description>
+    </attribute>
+    <attribute>
+      <name>include</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                include
+            </description>
+    </attribute>
+    <attribute>
+      <name>status</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                filter status
+            </description>
+    </attribute>
+    <attribute>
+      <name>prjid</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                filter status
+            </description>
+    </attribute>
+  </tag>
+  <!-- User Display Tag -->
+  <tag>
+    <name>userDisplay</name>
+    <tag-class>com.ocs.indaba.tag.UserDisplayTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>subjectUid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                subject user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>targetUid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                target user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>showBio</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                show bio
+            </description>
+    </attribute>
+    <attribute>
+      <name>pureText</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Pure Text
+            </description>
+    </attribute>
+  </tag>
+  <!-- Your Assignments Tag -->
+  <tag>
+    <name>yourassginments</name>
+    <tag-class>com.ocs.indaba.tag.YourAssignmentsTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>targetUid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                target user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>subjectUid</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                subject user id
+            </description>
+    </attribute>
+  </tag>
+  <!-- Manage Assignments Tag -->
+  <tag>
+    <name>manageassginments</name>
+    <tag-class>com.ocs.indaba.tag.ManageAssignmentsTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>targetUid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                target user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>subjectUid</name>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                subject user id
+            </description>
+    </attribute>
+  </tag>
+  <!-- Team Content Tag -->
+  <tag>
+    <name>teamcontent</name>
+    <tag-class>com.ocs.indaba.tag.TeamContentTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+  </tag>
+  <!-- Your Content Tag -->
+  <tag>
+    <name>yourcontent</name>
+    <tag-class>com.ocs.indaba.tag.YourContentTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+  </tag>
+  <!-- All Content Tag -->
+  <tag>
+    <name>allcontent</name>
+    <tag-class>com.ocs.indaba.tag.AllContentTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>prjid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                project id
+            </description>
+    </attribute>
+    <attribute>
+      <name>uid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                user id
+            </description>
+    </attribute>
+    <attribute>
+      <name>targetIds</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                target ids
+            </description>
+    </attribute>
+    <attribute>
+      <name>prodIds</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                product ids
+            </description>
+    </attribute>
+    <attribute>
+      <name>status</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                status
+            </description>
+    </attribute>
+  </tag>
+  <!-- Goal Tag -->
+  <tag>
+    <name>goal</name>
+    <tag-class>com.ocs.indaba.tag.GoalTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>name</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                name
+            </description>
+    </attribute>
+    <attribute>
+      <name>status</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                status
+            </description>
+    </attribute>
+    <attribute>
+      <name>index</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                index
+            </description>
+    </attribute>
+    <attribute>
+      <name>seqid</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                sequence id
+            </description>
+    </attribute>
+  </tag>
+  <tag>
+    <name>abbreviate</name>
+    <tag-class>com.ocs.indaba.tag.AbbreviateStringHandler</tag-class>
+    <body-content>empty</body-content>
+    <attribute>
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.String</type>
+    </attribute>
+    <attribute>
+      <name>length</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <type>java.lang.Integer</type>
+    </attribute>
+  </tag>
+  <tag>
+    <name>msg</name>
+    <tag-class>com.ocs.indaba.tag.MessageTagHandler</tag-class>
+    <display-name>message</display-name>
+    <body-content>jsp</body-content>
+    <description>
+            Format a message (using java.text.MessageFormat) from the value
+            resulting from looking up the provided key within the default or
+            specified resource bundle. Arguments to MessageFormat can be
+            supplied as an object array or as subtags within the message tag body.
+            Message tags require that a default bundle be provided (by placing
+            a bundle tag prior to the message tag) or that a bundle or bundleRef
+            attribute be supplied to the tag.
+        </description>
+    <attribute>
+      <name>key</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                The key to use when retrieving the display message format from the
+                ResourceBundle.
+            </description>
+    </attribute>
+    <attribute>
+      <name>args</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Provides an array of args for use with java.text.MessageFormat when
+                formatting the display text. This is an alternative to using arg
+                subtags.
+            </description>
+    </attribute>
+    <attribute>
+      <name>debug</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                Set to "true" to log debugging messages.
+            </description>
+    </attribute>
+  </tag>
+  <tag>
+    <name>arg</name>
+    <tag-class>com.ocs.indaba.tag.MessageArgumentTagHandler</tag-class>
+    <body-content>empty</body-content>
+    <display-name>msgArg</display-name>
+    <description>
+            The arg tag is a simpler (and usually more readable) alternative
+            to using the Message tag's args attribute for specifying arguments to
+            MessageFormat. Note that if you use arguments for your message tags,
+            java.util.MessageFormat puts some restrictions on the characters you
+            are allowed to use.  The one that is most likely to affect you is the
+            requirement that single apostrophies should be escaped by another
+            apostrophe (so, you replace ' with '' in your resource bundle
+            properties file).
+            Must reside inside the body of a message tag.
+        </description>
+    <summary>
+            Specifies arguments to be used by the message tag's MessageFormat.
+        </summary>
+    <attribute>
+      <name>value</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                This attribute is to replace a positional variable in the message
+                text. See the javadoc api for java.text.MessageText
+            </description>
+    </attribute>
+    <example>
+            Provide a date and number to be formatted in the message in the right location and according to the user's locale.
+&lt;indaba:msg key="test2"&gt; 
+   &lt;i18n:arg value="&lt;%= dateArg %&gt;" /&gt; 
+   &lt;i18n:arg value="&lt;%= numberArg %&gt;" /&gt; 
+&lt;/indaba:nmsg&gt;
+        </example>
+  </tag>
+  <tag>
+    <name>url</name>
+    <tag-class>com.ocs.indaba.tag.URLTagHandler</tag-class>
+    <body-content>JSP</body-content>
+    <attribute>
+      <name>action</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                action
+            </description>
+    </attribute>
+    <attribute>
+      <name>value</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+      <description>
+                value
+            </description>
+    </attribute>
+  </tag>
+  <function>
+    <name>replaceAll</name>
+    <function-class>com.ocs.util.StringUtils</function-class>
+    <function-signature>
+            java.lang.String replaceAll(java.lang.String,java.lang.String,java.lang.String)
+        </function-signature>
+  </function>
+  <function>
+    <name>replace</name>
+    <function-class>com.ocs.util</function-class>
+    <function-signature>
+            java.lang.String replace(java.lang.String,java.lang.String,java.lang.String)
+        </function-signature>
+  </function>
+</taglib>

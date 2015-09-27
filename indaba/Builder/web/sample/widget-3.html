@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><indaba:msg key='jsp.widget3.pagetitle' /></title>
+        <script type="text/javascript" src="../js/jquery-1.7.1.js"></script>
+        <script>
+            var params = {};
+            var mapping = {};
+            $(document).ready(function(){
+                var s = location.search.substr(1);
+                if (s){
+                    var arr = s.split('&');
+                    for (var i=0; i<arr.length; i++){
+                        var name = arr[i].substr(0, arr[i].indexOf('='));
+                        var value = arr[i].substr(arr[i].indexOf('=')+1);
+                        params[name] = decodeURIComponent(value);
+                        if (name == 'mapping'){
+                            var aa = params[name].split(',');
+                            for (var j=0; j<aa.length; j++){
+                                var oldp = aa[j].substr(0, aa[j].indexOf('->'));
+                                var newp = aa[j].substr(aa[j].indexOf('->')+2);
+                                mapping[oldp] = newp;
+                            }
+                        }
+                    }
+                }
+
+                // prevent navigation
+                $('a').each(function(){
+                    if (params['base']){
+                        var href = $(this).attr('href');
+                        href = params['base'] + href.substr(href.indexOf('?'));
+                        for (var p in mapping){
+                            href.replace(p+'=', mapping+'=');
+                        }
+                        $(this).attr('href', href);
+                    }
+                });
+            });
+
+            function copyDeepLink(){
+                if(window != window.top){
+                    // it's embedded in other page}
+                    var iframes = top.document.body.getElementsByTagName('IFRAME');
+                    var urlParams = [];
+                    for(var i=0; i<iframes.length; i++){
+                        var func = iframes[i].contentWindow.getParams;
+                        if (func){
+                            urlParams.push(func());
+                        }
+                    }
+			
+                    var ps = parseParams(top.location.search.substr(1));
+                    var arr = urlParams.join('&').split('&');
+                    for(var i=0; i<arr.length; i++){
+                        var name = arr[i].substr(0, arr[i].indexOf('='));
+                        var value = arr[i].substr(arr[i].indexOf('=')+1);
+                        ps[name] = value;
+                    }
+			
+                    var s = '';
+                    for(var i in ps){
+                        s += '&' + i + '=' + ps[i];
+                    }
+			
+                    if (s){
+                        var str = top.location.href;
+                        if (str.indexOf('?') > -1)
+                            str = str.substr(0, str.indexOf('?'));
+
+                        alert(str + '?' + s.substr(1));
+                    }
+                }
+            }
+	
+            function getParams(){
+                return '';
+            }
+        </script>
+    </head>
+    <body>
+        <h2><indaba:msg key='jsp.widget3.clicklinks' />: </h2>
+        <a href="page1.jsp?journalId=4&userId=12" target="_top"><indaba:msg key='jsp.widget3.gotojournal' /></a>
+    </body>
+</html>

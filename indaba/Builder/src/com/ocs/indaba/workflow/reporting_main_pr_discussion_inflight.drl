@@ -1,0 +1,70 @@
+package com.ocs.indaba.workflow
+
+import java.util.Date;
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.service.SiteMessageService;
+import com.ocs.indaba.util.DateUtils;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.CaseService;
+
+rule "Check task before due 2"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval(ta.getDueTime().getTime()-(new Date()).getTime() <= 2*1000*60*60*24)
+    then
+    	// System.out.println("=====<<<< CHECK TASK BEFORE DUE 2 >>>>======");
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_REMINDER2_ABOUT_DUE);
+end
+
+rule "Check task overdue 1"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval((new Date()).getTime()-ta.getDueTime().getTime() >= 2*1000*60*60*24)
+    then
+    	// System.out.println("=====<<<< CHECK TASK OVERDUE 1 >>>>======");
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_NOTICE1_TASK_OVERDUE);
+end
+
+rule "Check task overdue 2"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval((new Date()).getTime()-ta.getDueTime().getTime() >= 5*1000*60*60*24)
+    then
+    	// System.out.println("=====<<<< CHECK TASK OVERDUE 2 >>>>======");
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_NOTICE2_TASK_OVERDUE);
+end
+
+rule "Report task overdue 1"
+    when
+        ta: TaskAssignment()
+        goalObject: GoalObject()
+	siteMessageService: SiteMessageService()
+        caseService: CaseService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval((new Date()).getTime()-ta.getDueTime().getTime() >= 5*(long)DateUtils.MILLISECONDS_OF_DAY)
+    then
+    	// System.out.println("=====<<<< REPORT TASK OVERDUE 1 >>>>======");
+        siteMessageService.reportToProjectAdmin(goalObject, ta, Constants.NOTIFICATION_TYPE_ALERT1_TASK_OVERDUE);
+        // caseService.openCaseForProjectAdmin(ta, "Task Overdue", Constants.NOTIFICATION_TYPE_ALERT1_TASK_OVERDUE);
+end
+
+rule "Report task overdue 2"
+    when
+        ta: TaskAssignment()
+        goalObject: GoalObject()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval((new Date()).getTime()-ta.getDueTime().getTime() >= 10*(long)DateUtils.MILLISECONDS_OF_DAY)
+    then
+    	// System.out.println("=====<<<< REPORT TASK OVERDUE 2 >>>>======");
+        siteMessageService.reportToProjectAdmin(goalObject, ta, Constants.NOTIFICATION_TYPE_ALERT2_TASK_OVERDUE);
+end
+

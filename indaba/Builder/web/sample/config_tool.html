@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><indaba:msg key='jsp.configtool.pagetitle' /></title>
+        <script type="text/javascript" src="../js/jquery-1.7.1.js"></script>
+        <style>
+            iframe {border:0;}
+        </style>
+        <script>
+            String.prototype.trim = function(){
+                return this.replace(/(^\s*)|(\s*$)/g, "");
+            }
+
+            function addMapping(){
+                var oldp = $('#p-old').val().trim();
+                var newp = $('#p-new').val().trim();
+
+                if (oldp && newp){
+                    var opt = document.createElement("OPTION");
+                    $('#mapping').append(opt);
+                    $(opt).text(oldp + '->' + newp);
+                }
+            }
+
+            function removeMapping(){
+                $('option:selected').remove();
+            }
+
+            function generate(){
+                var w = document.getElementById('p-width').value;
+                var h = document.getElementById('p-height').value;
+                var m = '';
+                for(var i=0; i<document.getElementById('mapping').children.length; i++){
+                    if(i>0) m += ',';
+                    var opt = document.getElementById('mapping').children[i];
+                    m += opt.innerText || opt.textContent;
+                }
+                var p = 'mapping=' + encodeURIComponent(m);
+                if ($('#p-base').val())
+                    p += '&base=' + encodeURIComponent($('#p-base').val());
+
+                var s = '<iframe src="widget-3.html?'+p+'" width="'+w+'" height="'+h+'"></iframe>';
+                $('#embed-code').val(s);
+            }
+
+            function preview(){
+                $('#preview').attr('innerHTML', $('#embed-code').val());
+            }
+        </script>
+    </head>
+    <body>
+        <h1><indaba:msg key='jsp.configtool.h1' /></h1>
+        <fieldset style="width:500px">
+            <legend><indaba:msg key='jsp.configtool.configuration' /></legend>
+            <table>
+                <tr>
+                    <td><indaba:msg key='jsp.configtool.width' />:</td>
+                    <td><input type="text" id="p-width" value="500"></td>
+                </tr>
+                <tr>
+                    <td><indaba:msg key='jsp.configtool.height' />:</td>
+                    <td><input type="text" id="p-height" value="200"></td>
+                </tr>
+                <tr>
+                    <td><indaba:msg key='jsp.configtool.targetaddr' />:</td>
+                    <td><input type="text" id="p-base" value="http://mysite.com/mypage.jsp" size="30"></td>
+                </tr>
+            </table>
+            <hr/>
+            <indaba:msg key='jsp.configtool.parameter' />: <input type="text" id="p-old" size="10"/>&nbsp;&nbsp;
+            <indaba:msg key='jsp.configtool.mapptingto' />: <input type="text" id="p-new" size="10" />
+            <button onclick="addMapping()"><indaba:msg key='common.btn.add' /></button>
+            <select id="mapping" size="5" style="width:160px">
+                <option>journalId->jid</option>
+                <option>userId->player</option>
+            </select>
+            <button onclick="removeMapping()"><indaba:msg key='jsp.configtool.btn.rmselected' /></button>
+            <p/>
+            <button onclick="generate()"><indaba:msg key='jsp.configtool.btn.gencode' /></button>
+        </fieldset>
+
+        <br/>
+        <textarea id="embed-code" rows="10" cols="50"><iframe src="widget-3.html" width="500" height="200"></iframe></textarea>
+        <br/>
+        <button onclick="preview()"><indaba:msg key='common.btn.preview' /></button>
+
+        <h2>=======<indaba:msg key='common.btn.preview' />=======</h2>
+        <div id="preview">
+            <iframe src="widget-3.html" width="500" height="200"></iframe>
+        </div>
+    </body>
+</html>

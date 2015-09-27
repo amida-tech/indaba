@@ -1,0 +1,56 @@
+div.note{
+    color:#888;
+    font-style:italic;
+    margin-top:1em;
+}
+ul li{
+    margin-bottom:.5em;
+}
+ol li{
+    margin-bottom:0;
+}
+.parameter{
+    background-color:yellow;
+    display:inline-block;
+    padding:0 8px;
+}
+.result-src{
+    background-color:red;
+    color:#fff;
+    display:inline-block;
+    padding:0 8px;
+    text-transform:lowercase;
+}
+pre{
+    color:blue;
+    font-size:12px;
+    margin:0 0 0 -7em;
+}
+#sidebar{
+    font-size:12px;
+    padding:10px;
+}
+#sidebar h2{
+    color:#888;
+    font-size:14px;
+    font-weight:lighter;
+    margin-bottom:8px;
+}
+.ui-icon{
+    left:1em;
+    position:absolute;
+}
+#sidebar ul{
+    list-style-type:none;
+}
+#sidebar ul li{
+    padding-left:18px;
+}
+#sidebar ul li a{
+    display:inline-block;
+    height:16px;
+}
+dt.step{
+    font-size:1.4em;
+    margin-bottom:8px;
+}

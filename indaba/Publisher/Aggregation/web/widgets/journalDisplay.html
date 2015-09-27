@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Journal Display</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/widget.common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document.body).append('<div class="loading"></div>');
+            
+            var url = '../journal.do?'+$WIDGET.getParamUrlComponent();
+            $.getJSON(url, function(json){
+                $('#journal-title').text(json.title);
+                $('#journal-body').append(json.body);
+                $('style', $('#journal-body')).remove();
+
+
+                if (json.reviews && json.reviews.length>0){
+                    $('#journal-sidebar').show();
+                    // reviews
+                    var html = '<h3>Peer Review Comments</h3>';
+                    for (var i=0; i<json.reviews.length; i++){
+                        var review = json.reviews[i];
+                        html += "<div class='journal-sidebar-item'>";
+                        html += "<h4>" + review.author + ":</h4>";
+                        var rv = review.comment;
+                        if (rv.length > 200)
+                            rv = rv.substr(0, 200) + "...";
+                        html += "<p class='review-body'>" + rv + "</p>";
+                        html += "<a href='journalComments.html?"+$WIDGET.getParamUrlComponent()+"'>More</a>";
+                        html += "</div>";
+                    }
+                    html += "<div id='journal-sidebar-footer'><a href='journalComments.html?"+$WIDGET.getParamUrlComponent()+"'>All reviewer comments</a></div>";
+                    $('#journal-sidebar').html(html);
+                }
+                
+                $('.loading').remove();
+                $WIDGET.widgetResizePipe('JOURNAL_DISPLAY');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="widget-container">
+        <h2 id="journal-title"></h2>
+        <div id="journal-body">
+            <div id="journal-sidebar" style="display:none;"></div>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+</body>
+</html>

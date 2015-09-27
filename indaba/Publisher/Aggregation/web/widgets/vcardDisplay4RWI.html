@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>Vertical Scorecard Display</title>
+        <link rel="stylesheet" href="css/common.css" />
+        <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+        <script type="text/javascript" src="js/widget.common.js"></script>
+        <script type="text/javascript" src="../../js/json2.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+                $(document.body).append('<div class="loading"></div>');
+            
+                var horseId = $WIDGET.getUrlParameter('horseId');
+                var url = '../vcardSummary4RWI.do?horseId='+horseId;
+                var subcatIds = '';
+                var exportPdf = $WIDGET.getUrlParameter('exportPdf');
+
+                $.getJSON(url, function(json){
+                    $('#scorecard-title').text(json.productName+': '+json.target+' '+json.studyPeroid);
+
+                    var html = '<p id="stat-p">';
+                    for (var i=0; i<json.aggrs.length; i++){// ignore
+                        /*
+                        html += '<span style="display:inline-block;text-align:right;width:200px;">' + json.aggrs[i].name + ': ' + '</span>';
+                        html += $WIDGET.getStrongnessHtml4RWI(json.aggrs[i].value, json.aggrs[i].label, 'green', false, true) + '<br/>';
+                         */
+                    }
+                    html += '</p>';
+
+                    html += '<p/><table width="100%">';
+                    for (var i=0; i<json.categories.length; i++){
+                        var cat = json.categories[i];
+                        var roman = getRoman(i+1);
+                        html += '<tr class="category"><td nowrap>Category '+roman+'</td>';
+                        html += '<td>'+cat.name+'</td>';
+                        html += '<td>'+$WIDGET.getStrongnessHtml4RWI(cat.scoreValue, cat.useScore, cat.useScore, json.scoreRangeDefArr)+'</td></tr>';
+                        for (var j=0; j<cat.subcats.length; j++){
+                            var sub = cat.subcats[j];
+                            var tag = j % 2 == 1 ? '<tr class="even">' : '<tr>';
+                            html += tag+'<td>'+sub.label+'</td>';
+                            $WIDGET.setParameter('subcatId', sub.id);
+                            html += '<td><a href="vcardDisplayIndicators4RWI.html?'+$WIDGET.getParamUrlComponent()+'&showscore='+((j==0)?false:true)+'">'+sub.name+'</a></td>';
+                            html += '<td nowrap>'+$WIDGET.getStrongnessHtml4RWI(sub.scoreValue, true, sub.useScore, json.scoreRangeDefArr, ((j==0)?'':'N/A'))+'</td></tr>';
+                            //
+                            subcatIds += ','+sub.id;
+                        }
+
+                        // space holder tr
+                        if (i < json.categories.length-1)
+                            html += '<tr class="clear"><td colspan="3">&nbsp;</td></tr>';
+                    }
+                    html += '</table>';
+                    //export pdf
+                    if(exportPdf == null){
+                        html += '<div style="text-align:right;padding:0px 30px;"><a href="../exportPdfForScorecard.do?rwi=true&horseId='+horseId+'&subcatIds='+subcatIds+'">Download PDF</a></div>';
+                    }
+                    $('.widget-container').append(html);
+
+                    $('.loading').remove();
+                    $WIDGET.widgetResizePipe('VCARD_DISPLAY');
+                });
+            });
+
+            function getRoman(num){
+                var numbers = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+                var letters = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"];
+
+                var roman = '';
+                var n = num;
+                for (var i=0; i<numbers.length; i++){
+                    while (n >= numbers[i]){
+                        roman += letters[i];
+                        n -= numbers[i];
+                    }
+                }
+                return roman;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="widget-container">
+            <h2 id="scorecard-title"></h2>
+        </div>
+    </body>
+</html>

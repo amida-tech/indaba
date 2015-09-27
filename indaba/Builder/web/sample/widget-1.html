@@ -1,0 +1,90 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><indaba:msg key='jsp.widget1.pagetitle' /></title>
+<style>
+</style>
+<script>
+	window.onload = function(){
+		var search = location.search.substr(1) || top.location.search.substr(1);
+		var params = parseParams(search);
+		
+		// set value
+		if (params['locale'])
+			document.getElementById(params['locale']).checked = true;
+	}
+	
+	function parseParams(search){
+		var params = {};
+		if (search){
+			var arr = search.split('&');
+			for(var i=0; i<arr.length; i++){
+				var name = arr[i].substr(0, arr[i].indexOf('='));
+				var value = arr[i].substr(arr[i].indexOf('=')+1);
+				params[name] = value;
+			}
+		}
+		return params;
+	}
+	
+	function copyDeepLink(){
+		if(window != window.top){
+			// it's embedded in other page
+			var iframes = top.document.body.getElementsByTagName('IFRAME');
+			var urlParams = [];
+			for(var i=0; i<iframes.length; i++){
+				var func = iframes[i].contentWindow.getParams;
+				if (func){
+					urlParams.push(func());
+				}
+			}
+			
+			var ps = parseParams(top.location.search.substr(1));
+			var arr = urlParams.join('&').split('&');
+			for(var i=0; i<arr.length; i++){
+				var name = arr[i].substr(0, arr[i].indexOf('='));
+				var value = arr[i].substr(arr[i].indexOf('=')+1);
+				ps[name] = value;
+			}
+			
+			var s = '';
+			for(var i in ps){
+				s += '&' + i + '=' + ps[i];
+			}
+			
+			if (s){
+				var str = top.location.href;
+				if (str.indexOf('?') > -1)
+					str = str.substr(0, str.indexOf('?'));
+
+				alert(str + '?' + s.substr(1));
+			}
+		}
+	}
+	
+	function getParams(){
+		var locale;
+		if (document.getElementById('en-US').checked)
+			locale = 'en-US';
+		else if (document.getElementById('zh-CN').checked)
+			locale = 'zh-CN';
+		else if (document.getElementById('ko-KR').checked)
+			locale = 'ko-KR';
+			
+		return "locale=" + locale;
+	}
+</script>
+</head>
+<body>
+<dl>
+	<dt><indaba:msg key='jsp.widget1.dt' />:</dt>
+	<dd>
+		<input type="radio" name="lang" id="en-US"><label for="en-US">English</label>
+		<input type="radio" name="lang" id="zh-CN"><label for="zh-CN">Chinese</label>
+		<input type="radio" name="lang" id="ko-KR"><label for="ko-KR">Korean</label>
+	</dd>
+</dl>
+<button onclick="copyDeepLink()"><indaba:msg key='common.btn.copydeeplink' /></button>
+</body>
+</html>

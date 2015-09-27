@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>Multiples Widgets</title>
+        <style>
+            iframe {
+                float:left;
+                margin-right:1em;
+            }
+            #div-permlink{
+                background-color:#ddf;
+                padding:1em;
+            }
+            #div-permlink button{
+                background-color:blue;
+                border:1px solid blue;
+                color:#fff;
+                display:block;
+                margin-bottom:5px;
+                padding:5px 10px;
+            }
+        </style>
+        <script>
+            function getPermlink(){
+                document.getElementById('permlink').value=$widget.getPermlink();
+            }
+        </script>
+    </head>
+    <body>
+        <div id="div-permlink">
+            <button onclick="getPermlink()">Get Permlink</button>
+            <textarea id="permlink" style="width:96%;height:100px;"></textarea>
+        </div>
+        <iframe id="frame1" frameborder="0" width="96%" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame2" frameborder="0" width="48%" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame3" frameborder="0" width="96%" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame4" frameborder="0" width="96%" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame5" frameborder="0" scrolling="no"
+                src="" width="380" height="637"></iframe>
+        <iframe id="frame6" frameborder="0" scrolling="no"
+                src="" width="380" ></iframe>
+        <iframe id="frame7" frameborder="0" scrolling="no"
+                src="" width="380" height="637"></iframe>
+
+        <script type="text/javascript">
+            var ss = location.href.split('/');
+            ss = ss.slice(0, -2);
+            var base = ss.join('/');
+            var helper = base+'/indaba_widget_helper.html';
+
+            document.getElementById('frame1').src =
+                base+'/journalDisplay.html?horseId=44&includeReviews=1&includeLogo=1&version=1'+'&frameId=frame1&helper='+encodeURIComponent(helper);
+            document.getElementById('frame2').src =
+                base+'/journalDisplay.html?horseId=37&includeReviews=0&includeLogo=1&version=1'+'&frameId=frame2&helper='+encodeURIComponent(helper);
+            document.getElementById('frame3').src =
+                base+'/vcardDisplay.html?horseId=1&includeLogo=1&version=1'+'&frameId=frame3&helper='+encodeURIComponent(helper);
+            document.getElementById('frame4').src =
+                base+'/hcardDisplay.html?productId=1&includeLogo=1&version=1'+'&frameId=frame4&helper='+encodeURIComponent(helper);
+            document.getElementById('frame5').src =
+                base+'/../dataSummary.jsp?genericLabel=1&horseId=2&includeLogo=1&version=1'+'&frameId=frame6&helper='+encodeURIComponent(helper);
+            document.getElementById('frame6').src =
+                base+'/../indicatorSummary.jsp?genericLabel=1&horseId=3&includeLogo=1&version=1'+'&frameId=frame6&helper='+encodeURIComponent(helper);
+            document.getElementById('frame7').src =
+                base+'/../sparkline.jsp?productId=1&horseId=1+2+3+4&version=1&includeLogo=1'+'&frameId=frame7&helper='+encodeURIComponent(helper);
+        </script>
+
+        <script type="text/javascript" src="../indaba_widget.js"></script>
+    </body>
+</html>

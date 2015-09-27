@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    <global-forwards>
+        <forward name="login" path="/login.jsp"/>
+        <forward name="error" path="/error.jsp"/>
+    </global-forwards>
+
+    <action-mappings>
+        <action path="/dataLoader" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="autoExportCharts" path="/autoExportCharts.do"/>
+        </action>
+        <action path="/idef" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/jsonViewer" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="createworkset" scope="request">
+            <forward name="jsonViewer" path="/jsonviewer.jsp"/>
+        </action>
+        <action path="/login" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="login" scope="request">
+            <forward name="success" path="/index.jsp"/>
+            <forward name="failure" path="/login.jsp"/>
+        </action>
+        <action path="/logout" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="logout" scope="request">
+            <forward name="success" path="/"/>
+        </action>
+        <action path="/widgetlibrary" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="widgetlibrary" scope="request">
+            <forward name="widgetlibrary" path="/widgetlibrary.jsp"/>
+        </action>
+        <action path="/managewidget" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="managewidget" scope="request">
+            <forward name="managewidget" path="/managewidget.jsp"/>
+        </action>
+        <action path="/savewidget" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="savewidget" scope="request">
+        </action>
+        <action path="/help" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/help.jsp"/>
+        </action>
+        <action path="/introduction" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/introduction.jsp"/>
+        </action>
+        <action path="/journal" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/journalSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardSubcat" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardSubcat4RWI" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardQuestionSet" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardQuestionSet4RWI" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/scorecardAnswer" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/vcardSummary4RWI" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/hcardSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/hcardSubcatSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/hcardQuestionSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/dataSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/indicatorSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/sparklineData" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/scorecardReport" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/targets4prd" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="targets4prd" scope="request">
+        </action>
+        <action path="/createworkset" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="createworkset" scope="request">
+            <forward name="step1" path="/createworkset_1.jsp"/>
+            <forward name="step2" path="/createworkset_2.jsp"/>
+            <forward name="step3" path="/createworkset_3.jsp"/>
+            <forward name="step4" path="/createworkset_4.jsp"/>
+            <forward name="done" path="/createworkset.do?step=1"/>
+        </action>
+
+        <action path="/createaggregation" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="createaggregation" scope="request">
+            <forward name="step1" path="/createaggregation_1.jsp"/>
+            <forward name="step2" path="/createaggregation_2.jsp"/>
+            <forward name="step3" path="/createaggregation_3.jsp"/>
+            <forward name="step4" path="/createaggregation_4.jsp"/>
+            <forward name="success" path="/createaggregation.do?step=1"/>
+        </action>
+        <action path="/createDataExport" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="step1" path="/createdataexport_1.jsp"/>
+            <forward name="step2" path="/createdataexport_2.jsp"/>
+            <forward name="step3" path="/createdataexport_3.jsp"/>
+            <forward name="step4" path="/createdataexport_4.jsp"/>
+            <forward name="done" path="/createdataexport_5.jsp"/>
+            <forward name="step_process" path="/export_processing.jsp"/>
+        </action>
+        <action path="/createJournalExport" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="step1" path="/createjournalexport_1.jsp"/>
+            <forward name="step2" path="/createjournalexport_2.jsp"/>
+            <forward name="done" path="/createjournalexport_3.jsp"/>
+            <forward name="step_process" path="/export_processing.jsp"/>
+        </action>
+        <action path="/createScorecardExport" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="view" path="/createScorecardDataExport.jsp"/>
+        </action>
+        <action path="/sparklineChart" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+        <action path="/indicatorSummaryChart" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+        <action path="/dataSummaryChart" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+        <action path="/checkaggregation" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+        <action path="/quitaggregation" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" >
+            <forward name="success" path="/createaggregation.do?step=1"/>
+        </action>
+        <action path="/quitworkset" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" >
+            <forward name="success" path="/createworkset.do?step=1"/>
+        </action>
+        <action path="/exportDownload"  type="org.springframework.web.struts.DelegatingActionProxy"
+                name="singleUpload" scope="request">
+        </action>
+         <!-- Copy from Builder -->
+        <action path="/attachment"  type="org.springframework.web.struts.DelegatingActionProxy"
+                name="singleUpload" scope="request">
+        </action>
+        <action path="/manageaggregation" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/manageaggregation.jsp"/>
+        </action>
+        <action path="/manageworkset" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/manageworkset.jsp"/>
+        </action>
+        <action path="/getprojects" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/autoExportCharts" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/aggregate" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/exportPdfForScorecard" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/highResDownload" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+         <action path="/manageorgkey" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/manageorgkey.jsp"/>
+        </action>
+         <action path="/generateApi" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+         <action path="/products" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request" />
+    </action-mappings>
+
+    <controller processorClass="org.springframework.web.struts.DelegatingRequestProcessor" >
+        <set-property property="maxFileSize" value="10M" />
+        <set-property property="memFileSize" value="10M" />
+        <set-property property="tempDir" value="/tmp" />
+    </controller>
+    <message-resources parameter="ApplicationResources"/>
+
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation" value="/WEB-INF/spring/applicationContext.xml" />
+    </plug-in>
+    <!--
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-def.xml" />
+        <set-property property="definitions-parser-validate" value="true" />
+    </plug-in> -->
+</struts-config>
+

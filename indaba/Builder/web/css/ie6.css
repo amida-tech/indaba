@@ -1,0 +1,62 @@
+#nav li a {
+    width: 30px;
+}
+
+#nav ul li a {
+    width: auto;
+}
+
+#search {
+    margin-top: 5px;
+    display: inline;
+}
+
+#cc_continue {
+    position: relative;
+    top: -10px;
+}
+
+#ecomm-zoom {
+    margin-left: -10px;
+}
+
+#login-form td.user-help p.border-dashed {
+    margin-bottom: 0;
+}
+
+#member-features #img-pro-wrap {
+    display: none;
+    position: absolute;
+    top: 250px;
+    left: 475px;
+    z-index: 50;
+    line-height: 16px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+/* button spacing */
+#contribute {
+    margin: 10px auto 10px 130px;
+    display: inline;
+}
+
+#viewMore {
+    margin-left: 33px;
+    display: inline;
+}
+
+p#addComment {
+    margin: 15px auto 15px 210px;
+    display: inline;
+}
+
+#ecard p#preview {
+    margin: 8px 0 10px 85px;
+    display: inline;
+}
+
+#single-photo p.big-button {
+    margin-left: 176px;
+    display: inline;
+}

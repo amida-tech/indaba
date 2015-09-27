@@ -1,0 +1,245 @@
+#header{
+    height:50px;
+}
+#widget{
+    margin-right:250px;
+    padding-bottom:2em;
+}
+.wrapper{
+    margin:10px;
+    position:relative;
+    text-align:left;
+}
+h2, hr{
+    margin-bottom:10px;
+    height:auto;
+}
+/******************** Override JQuery UI ********************/
+#sidebar{
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    background-color:#EBEBE4;
+    border:1px solid #aaa;
+    font-size:10px;
+    padding-left:10px;
+    position:absolute;
+    right:10px;
+    top:10px;
+    width:210px;
+}
+#sidebar h2{
+    border-bottom:0;
+    font-size:14px;
+    font-weight:normal;
+    margin:5px auto;
+    padding:0;
+    text-align:left;
+}
+#how-to{
+    color:#C36615;
+    font-size:12px;
+    line-height:2.4em;
+    text-decoration:none;
+}
+#how-to:hover{
+    color:#FF5C00;
+}
+
+.ui-tabs .ui-tabs-panel{
+    background-color:#EBEBE4;
+    padding:5px 0;
+}
+.ui-widget-header{
+    border:0;
+}
+.ui-widget-content{
+    background-color:#EBEBE4;
+    border:0;
+    padding:0;
+}
+.ui-tabs .ui-tabs-nav li a{
+    padding:.5em .8em;
+}
+
+/******************** Widget Gallery, tabs ********************/
+#doc-gallary{
+    margin:0 auto;
+    width:848px;
+}
+#doc-gallary h2{
+    color:#b07c40;
+    margin:1em auto;
+    text-align:center;
+}
+#doc-gallary .gallary-item{
+    float:left;
+    margin-bottom:20px;
+    margin-right:10px;
+}
+#doc-gallary .gallary-item a:link,
+#doc-gallary .gallary-item a:visited,
+#doc-gallary .gallary-item a:active{
+    background-color:#fff;
+    color:#333;
+    display:block;
+    padding:10px 10px 0;
+    text-decoration:none;
+}
+#doc-gallary .gallary-item a:hover{
+    background-color:#EBEBE4;
+    color:#f00;
+}
+.gallary-item img{
+    border:1px solid #999;
+}
+#doc-gallary .gallary-item h3{
+    font-size:12px;
+    text-align:center;
+    line-height:2em;
+}
+
+#sidebar .gallary-items{
+    float:left;
+    max-height:500px;
+    height:auto !important;
+    height:500px;
+    overflow-x:hidden;
+    overflow-y:auto;
+    width:100%;
+}
+#sidebar .gallary-item{
+    float:left;
+    margin-bottom:1px;
+    width:50%;
+}
+#sidebar .gallary-item a:link,
+#sidebar .gallary-item a:visited,
+#sidebar .gallary-item a:active{
+    background-color:transparent;
+    color:#333;
+    display:block;
+    padding:5px 5px 0;
+    text-decoration:none;
+}
+#sidebar .gallary-item a.selected,
+#sidebar .gallary-item a:hover{
+    background-color:#7C8437;
+    color:#fff;
+}
+#sidebar .gallary-item h5{
+    font-weight:normal;
+    line-height:2em;
+    margin-left:-5px;
+    margin-right:-5px;
+    overflow:hidden;
+    text-align:center;
+    width:100px;
+    white-space:nowrap;
+}
+#meta-table td{
+    font-size:10px;
+    padding:2px 0;
+    white-space:nowrap;
+}
+#iframe-src{
+    border:1px solid #aaa;
+    height:200px;
+    margin-bottom:10px;
+    min-height:200px!important;
+    height:auto;
+    width:198px;
+}
+#copy-src-btn{
+    margin-bottom:10px;
+}
+
+
+/******************** Widget Configuration ********************/
+#steps-bar, #imported-css{
+    list-style-position:inside;
+    list-style-type:none;
+}
+#imported-css li{
+    color:#1C94C4;
+    margin:0 0 3px;
+    padding:.4em .4em .4em 1.8em;
+}
+#imported-css li span{
+    cursor:pointer;
+    margin-left:-1.6em;
+    position:absolute;
+}
+
+#steps-content{
+    clear:both;
+    padding-top:10px;
+    text-align:right;
+    min-height:400px;
+    height:auto!important;
+    height:400px;
+}
+#steps-content > button{
+    margin-left:10px;
+}
+.step-content{
+    display:none;
+    margin-bottom:10px;
+    text-align:left;
+}
+
+.step-table{
+    width:100%;
+}
+.step-table th{
+    border:1px solid #fff;
+    white-space:nowrap;
+}
+.step-table thead tr{
+    background-color:#EBEBEB;
+}
+div.step-table{
+    max-height:400px;
+    overflow-y:auto;
+}
+.step-table tbody tr{
+    border-bottom:1px solid #EBEBEB;
+}
+.step-table tbody tr:hover{
+    background-color:#def0f8;
+}
+.step-table th, .step-table td{
+    font-weight:normal;
+    padding:5px 10px 5px 10px;
+}
+
+.text-input{
+    border:1px solid #aaa;
+    width:480px;
+}
+.text-input-tab{
+    border:1px solid #aaa;
+    width:480px;
+}
+input.placeholder{
+    color:#aaa;
+}
+em.param-tip{
+    color:#aaa;
+    display:inline-block;
+    font-style:italic;
+    padding-bottom:5px;
+}
+.no-wrap{
+    white-space:nowrap;
+}
+#no-data-msg{
+    background-color:#FBFEEC;
+    border:1px solid #eee;
+    color:#999;
+    display:none;
+    font-size:1.6em;
+    margin-bottom:340px;
+    margin-top:50px;
+    padding:1em;
+    text-align:center;
+}

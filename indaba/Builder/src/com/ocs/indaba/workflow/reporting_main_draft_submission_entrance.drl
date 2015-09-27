@@ -1,0 +1,16 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Welcome User"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() == Constants.TASK_STATUS_ACTIVE)
+    then
+    	// System.out.println("=====<<<< WELCOME USER >>>>======");
+        siteMessageService.sendWelcomeUserMessage(ta);
+end
+

@@ -1,0 +1,18 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Report Milestone Done"
+    when
+        ta: TaskAssignment()
+        goalObject: GoalObject()
+	siteMessageService: SiteMessageService()
+        eval(goalObject.getStatus() == Constants.GOAL_OBJECT_STATUS_DONE)
+    then
+    	System.out.println("=====<<<< REPORT MILESTONE DONE >>>>======");
+        siteMessageService.reportToProjectAdmin(goalObject, ta, Constants.NOTIFICATION_TYPE_NOTIFY_MILESTONE_COMPLETED);
+end
+

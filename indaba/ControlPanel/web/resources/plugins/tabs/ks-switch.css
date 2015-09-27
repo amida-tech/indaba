@@ -1,0 +1,52 @@
+.switchBox, .slideBox {
+    border: 5px solid #999999;
+    width: 480px;
+}
+.switchBox dt, .slideBox dt {
+    height: 24px;
+}
+.switchBox span, .switchBox a, .switchBox em, .slideBox span, .slideBox a, .slideBox em {
+    background-color: #999999;
+    color: #ffffff;
+    cursor: pointer;
+    float: left;
+    font-size: 14px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    text-decoration: none;
+    width: 120px;
+    font-style: normal;
+}
+.switchBox dt .on, .slideBox dt .on {
+    background-color: #ffffff;
+    font-weight: bolder;
+}
+.switchBox dt .active, .slideBox dt .active {
+    background-color: #ffffcc;
+    font-weight: bolder;
+}
+.switchBox dt .on, .switchBox dt .active, .switchBox a:hover, .slideBox dt .on, .slideBox dt .active, .slideBox a:hover {
+    color: #cc0000;
+}
+.switchBox dt .fat {
+    color: #0000ff;
+    width: 150px;
+}
+.switchBox dt .fat:hover {
+    color: #ffff00;
+}
+.switchBox dd, .slideBox dd {
+    clear: both;
+    display: none;
+    height: auto;
+    height: 100px;
+    min-height: 100px!important;
+    line-height: 20px;
+    padding: 10px;
+    font-family: "宋体";
+}
+.switchBox li {
+    margin-left: 20px;
+    list-style: square;
+}

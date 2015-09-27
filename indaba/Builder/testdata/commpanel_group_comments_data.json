@@ -1,0 +1,51 @@
+{
+    "uiState": {
+        "flagButtonState": 1,
+        "textBoxState": 2,
+        "titleBarState": 1
+    },
+    "flagId": 1,
+    "comments":
+            [
+                {
+                    "commentId": 1,
+                    "type": 1,
+                    "userDisplayName": "Luke Shi",
+                    "time": "2013-12-28 21:15:28",
+                    "text": "Yan Cheng's case is already fixed!",
+                    "state": 0
+                },
+                {
+                    "commentId": 2,
+                    "type": 2,
+                    "userDisplayName": "Yan Cheng",
+                    "time": "2013-12-26 08:14:15",
+                    "text": "This is Yan Cheng's comment. Please take a look at it!",
+                    "state": 1
+                },
+                {
+                    "commentId": 2,
+                    "type": 3,
+                    "userDisplayName": "Yan Cheng",
+                    "time": "2013-12-26 08:14:15",
+                    "text": "This is Yan Cheng's comment. Please take a look at it!",
+                    "state": 0
+                },
+                {
+                    "commentId": 2,
+                    "type": 4,
+                    "userDisplayName": "Yan Cheng",
+                    "time": "2013-12-26 08:14:15",
+                    "text": "This is Yan Cheng's comment. Please take a look at it!",
+                    "state": 1
+                },
+                {
+                    "commentId": 2,
+                    "type": 5,
+                    "userDisplayName": "Yan Cheng",
+                    "time": "2013-12-26 08:14:15",
+                    "text": "This is Yan Cheng's comment. Please take a look at it!",
+                    "state": 0
+                }
+            ]
+}

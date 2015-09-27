@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title><indaba:msg key='jsp.widget2.title' /></title>
+        <style>
+        </style>
+        <script>
+            window.onload = function(){
+                var search = location.search.substr(1) || top.location.search.substr(1);
+                var params = parseParams(search);
+		
+                // set value
+                if (params['first-name'])
+                    document.getElementById('first-name').value = params['first-name'];
+		
+                if (params['flavor']){
+                    var sel = document.getElementById('flavor');
+                    for(var i=0; i<sel.children.length; i++){
+                        if (sel.children[i].value == params['flavor']){
+                            sel.children[i].selected = true;
+                            break;
+                        }
+                    }
+                }
+            }
+	
+            function parseParams(search){
+                var params = {};
+                if (search){
+                    var arr = search.split('&');
+                    for(var i=0; i<arr.length; i++){
+                        var name = arr[i].substr(0, arr[i].indexOf('='));
+                        var value = arr[i].substr(arr[i].indexOf('=')+1);
+                        params[name] = value;
+                    }
+                }
+                return params;
+            }
+	
+            function copyDeepLink(){
+                if(window != window.top){
+                    // it's embedded in other page
+                    var iframes = top.document.body.getElementsByTagName('IFRAME');
+                    var urlParams = [];
+                    for(var i=0; i<iframes.length; i++){
+                        var func = iframes[i].contentWindow.getParams;
+                        if (func){
+                            urlParams.push(func());
+                        }
+                    }
+			
+                    var ps = parseParams(top.location.search.substr(1));
+                    var arr = urlParams.join('&').split('&');
+                    for(var i=0; i<arr.length; i++){
+                        var name = arr[i].substr(0, arr[i].indexOf('='));
+                        var value = arr[i].substr(arr[i].indexOf('=')+1);
+                        ps[name] = value;
+                    }
+			
+                    var s = '';
+                    for(var i in ps){
+                        s += '&' + i + '=' + ps[i];
+                    }
+			
+                    if (s){
+                        var str = top.location.href;
+                        if (str.indexOf('?') > -1)
+                            str = str.substr(0, str.indexOf('?'));
+
+                        alert(str + '?' + s.substr(1));
+                    }
+                }
+            }
+	
+            function getParams(){
+                var name = document.getElementById('first-name').value;
+                var flavor;
+                var sel = document.getElementById('flavor');
+                for(var i=0; i<sel.children.length; i++){
+                    if (sel.children[i].selected){
+                        flavor = sel.children[i].value;
+                        break;
+                    }
+                }
+                return "first-name=" + name + "&flavor=" + flavor;
+            }
+        </script>
+    </head>
+    <body>
+        <FORM METHOD="GET">
+            <indaba:msg key='jsp.widget2.entername' />: <INPUT id="first-name" NAME="first-name"><BR/>
+                <indaba:msg key='jsp.widget2.chooseflavor' />:
+                <SELECT NAME="flavor" id="flavor">
+                    <OPTION VALUE="Chocolate"><indaba:msg key='jsp.widget2.chocolate' /></OPTION>
+                    <OPTION VALUE="Strawberry"><indaba:msg key='jsp.widget2.strawberry' /></OPTION>
+                    <OPTION VALUE="Vanilla" SELECTED><indaba:msg key='jsp.widget2.vanilla' /></OPTION>
+                </SELECT>
+                <P /><INPUT TYPE=SUBMIT />
+        </FORM>
+        <p/>
+        <button onclick="copyDeepLink()"><indaba:msg key='common.btn.copydeeplink' /></button>
+    </body>
+</html>

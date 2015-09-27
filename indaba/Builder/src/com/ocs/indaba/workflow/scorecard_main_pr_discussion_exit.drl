@@ -1,0 +1,16 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Confirm Task Completion"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() == Constants.TASK_STATUS_DONE)
+    then
+    	// System.out.println("=====<<<< Post PEER REVIEW COMPLETE  >>>>======");
+        siteMessageService.postToProjectWall(ta, Constants.NOTIFICATION_TYPE_POST_PEER_REVIEW_COMPLETE);
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_CONFIRM_TASK_COMPLETED);
+end

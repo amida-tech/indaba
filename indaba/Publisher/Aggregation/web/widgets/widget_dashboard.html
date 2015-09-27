@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Widgets Dashboard</title>
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript">
+        function resizeIframe(height, widgetId){
+            switch(widgetId){
+                // add cases here if you want to handle each widgetId with different iframe respectively
+                // widgetId could be one of following:
+                // 'JOURNAL_DISPLAY', 'JOURNAL_COMMENT', 'VCARD_DISPLAY', 'VCARD_DISPLAY_INDICATOR',
+                // 'HCARD_DISPLAY', 'HCARD_DISPLAY_TARGET', 'DATA_SUMMARY', 'INDICATOR_SUMMARY', 'SPARKLINE'
+                default:
+                    // "+30" is a general rule of thumb to allow for differences in
+                    // IE & and FF height reporting, can be adjusted as required.
+                    document.getElementById('iframe').height = parseInt(height)+30;
+                    break;
+            }
+        }
+
+
+        var helper = 'http://localhost:8080/aggregation/widgets/indaba_widget_helper.html';
+
+
+        function loadShortJournal(){
+            var url = 'http://localhost:8080/aggregation/widgets/journalDisplay.html?horseId=37&includeReviews=0&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':400, height:600});
+            return false;
+        }
+
+        function loadLongJournalWithPR(){
+            var url = 'http://localhost:8080/aggregation/widgets/journalDisplay.html?horseId=37&includeReviews=1&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':800, height:600});
+            return false;
+        }
+
+        function loadLongJournalWithoutPR(){
+            var url = 'http://localhost:8080/aggregation/widgets/journalDisplay.html?horseId=37&includeReviews=0&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':800, height:600});
+            return false;
+        }
+
+        function loadVCard(){
+            var url = 'http://localhost:8080/aggregation/widgets/vcardDisplay.html?horseId=1&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':800, height:600});
+            return false;
+        }
+
+        function loadHCard(){
+            var url = 'http://localhost:8080/aggregation/widgets/hcardDisplay.html?productId=1&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':800, height:600});
+            return false;
+        }
+
+        function loadDataSummary(){
+            var url = 'http://localhost:8080/aggregation/dataSummary.jsp?horseId=1&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':400, height:600});
+            return false;
+        }
+
+        function loadIndicatorSummary(){
+            var url = 'http://localhost:8080/aggregation/indicatorSummary.jsp?horseId=1&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':400, height:600});
+            return false;
+        }
+
+        function loadSparkline(){
+            var url = 'http://localhost:8080/aggregation/sparkline.jsp?productId=1&horseId=1+2+3+4&version=1';
+            url += '&helper=' + encodeURIComponent(helper);
+            $('#iframe').attr({'src':url, 'width':400, height:600});
+            return false;
+        }
+    </script>
+</head>
+<body>
+    <ul>
+        <li><a href="#" onclick="loadShortJournal()">Short Journal Display - Half Width</a></li>
+        <li><a href="#" onclick="loadLongJournalWithPR()">Long Journal with Peer Reviews - Full Width</a></li>
+        <li><a href="#" onclick="loadLongJournalWithoutPR()">Long Journal without Peer Reviews - Full Width</a></li>
+        <li><a href="#" onclick="loadVCard()">Vertical Scorecard Widget – Full Width</a></li>
+        <li><a href="#" onclick="loadHCard()">Horizontal Scorecard Widget – Full Width</a></li>
+        <li><a href="#" onclick="loadDataSummary()">Data Summary Widget – Half Width</a></li>
+        <li><a href="#" onclick="loadIndicatorSummary()">Indicator Summary Widget – Half Width</a></li>
+        <li><a href="#" onclick="loadSparkline()">Sparkline</a></li>
+    </ul>
+    <iframe id='iframe' frameborder="0" scrolling="no"></iframe>
+</body>
+</html>

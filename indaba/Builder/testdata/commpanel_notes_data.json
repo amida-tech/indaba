@@ -1,0 +1,34 @@
+{
+    "languages": [
+        {
+            "id": 1,
+            "language": "EN",
+            "languageDesc": "English"
+        },
+        {
+            "id": 2,
+            "language": "FR",
+            "languageDesc": "French"
+        }
+    ],
+    "noteobjs": [
+        {
+            "noteobjId": 1,
+            "name": "NOTE 1111",
+            "description": "This is note object 1111 description.",
+            "canEditNote": true,
+            "canTranslateNote": true,
+	    "langId": 1,
+	    "text": "This is note text content for note object 1111."
+        },
+        {
+            "noteobjId": 2,
+            "name": "NOTE 2222",
+            "description": "This is note object 2222 description.",
+            "canEditNote": false,
+            "canTranslateNote": false,
+	    "langId": 2,
+	    "text": "This is note text content for note object 2222."
+        }
+    ]
+}

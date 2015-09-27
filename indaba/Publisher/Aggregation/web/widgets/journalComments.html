@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Short Journal Display</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/widget.common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document.body).append('<div class="loading"></div>');
+            var url = '../journal.do?'+$WIDGET.getParamUrlComponent();
+            $('#back-link').attr('href', 'journalDisplay.html?'+$WIDGET.getParamUrlComponent());
+
+            $.getJSON(url, function(json){
+                $('#journal-title').text(json.title);
+
+                // reviews
+                var html = '<h3>Peer Review Comments</h3>';
+                for (var i=0; i<json.reviews.length; i++){
+                    var review = json.reviews[i];
+                    html += "<div class='journal-review-item'>";
+                    html += "<a name='review"+(i+1)+"'></a>"
+                    html += "<h4>" + review.author + ":</h4>";
+                    html += "<div class='review-body'><pre>" + review.comment + "</pre></div>";
+                    html += "</div>";
+                }
+                $(".widget-container").append(html);
+                if (location.hash)
+                    location.hash = location.hash;
+
+                $('.loading').remove();
+                $WIDGET.widgetResizePipe('JOURNAL_COMMENT');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="widget-container">
+        <h2 id="journal-title"></h2>
+        <a id="back-link" href="#">Back</a>
+    </div>
+</body>
+</html>

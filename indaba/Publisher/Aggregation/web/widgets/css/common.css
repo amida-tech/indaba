@@ -1,0 +1,543 @@
+	/*
+
+	Version note: common.css 001
+
+	This updates common.css for Indaba widget styling. Changes to OCS file are commented. 
+	
+	Updates by Jonathan Eyler-Werve at Global Integrity  
+	second update April 30 2011
+
+	*/
+
+
+/************ RESET ************/
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,p,blockquote,th,td {
+	font-family: Verdana,Helvetica,Arial,sans-serif;
+	font-size:12px;
+	margin:0;
+	padding:0;
+}
+table {
+	border-collapse:collapse;
+	border-spacing:0;
+}
+fieldset,img {
+	border:0;
+}
+address,caption,cite,code,dfn,em,strong,th,var {
+	font-style:normal;
+	font-weight:normal;
+}
+ol,ul {
+	list-style:none;
+}
+caption,th {
+	text-align:left;
+}
+h1,h2,h3,h4,h5,h6 {
+	font-size:100%;
+	font-weight:normal;
+}
+q:before,q:after {
+	content:'';
+}
+abbr,acronym { border:0;
+}
+
+/************ FONTS ************/
+h1 {
+	font-size:26px;
+}
+h2 {
+	font-size:22px;
+}
+h3 {
+	font-size:16px;
+}
+h1,h2,h3 {
+	margin:1em 0;
+}
+abbr,acronym {
+	/*indicating to users that more info is available */
+	border-bottom:1px dotted #000;
+	cursor:help;
+}
+em {
+	font-style:italic;
+}
+strong {
+	font-weight: bolder;
+}
+
+ul,ol,dl {
+	/*giving lists room to breath*/
+	margin:1em;
+	}
+
+blockquote {
+	/*blockquotes displays in contasting font, with light gray background, indent*/
+	display: block;
+	padding: 20px;
+	background: #EEE;
+	font-family: Times New Roman, Times, serif;
+	font-size: 14px;
+	margin: 10px 0 20px 20px;
+	line-height: 20px;
+	border-top: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}  
+
+	
+ol,ul,dl {
+	/*bringing lists on to the page with breathing room */
+	margin-left:2em;
+}
+ol li {
+	/*giving OL's LIs generated numbers*/
+	list-style: decimal outside;
+}
+ul li {
+	/*giving UL's LIs generated disc markers*/
+	list-style: disc outside;
+}
+dl dd {
+	/*giving UL's LIs generated numbers*/
+	margin-left:1em;
+}
+th,td {
+	/*borders and padding to make the table readable*/
+	border:1px solid #000;
+	padding:.5em;
+}
+th {
+	/*distinguishing table headers from data cells*/
+	font-weight:bold;
+	text-align:center;
+}
+caption {
+	/*coordinated marking to match cell's padding*/
+	margin-bottom:.5em;
+	/*centered so it doesn't blend in to other content*/
+	text-align:center;
+}
+p,fieldset,table {
+	line-height:150%;
+	/*so things don't run into each other*/
+	margin-bottom:1em;
+}
+
+/************ COMMON ************/
+a:link {
+	color:#f30;
+	text-decoration:none;
+}
+a:visited {
+	color:#f30;
+}
+a:hover {
+	color:#f30;
+	text-decoration:underline;
+}
+a:active {
+	color:orange;
+}
+
+th, td {
+    border:0;
+    padding:4px 8px 4px 15px;
+    text-align:left;
+}
+tr {
+    border-bottom:1px solid #ccc;
+}
+tr.clear {
+    border:0;
+}
+tr.category td {
+    font-size:1.1em;
+	font-weight: bolder;
+}
+tr.even {
+    background-color:#eee;
+}
+td a:link,
+td a:active,
+li a:link,
+li a:active {
+    color:#f30;
+}
+td a:visited,
+li a:visited {
+    color:#f30;
+    text-decoration:none;
+}
+td a:hover,
+li a:hover {
+    color:#f30;
+}
+
+div.loading {
+    background:#eee url(../image/loading.gif) no-repeat center center;
+    height:100%;
+    left:0;
+    width:100%;
+    filter:alpha(opacity=100);
+    -moz-opacity:1;
+    opacity:1;
+    position:absolute;
+    top:0;
+    z-index:999;
+}
+
+/************ WIDGETS ************/
+.widget-container {
+   /*  margin:1em;  Removed by Jonathan E-W - this is best handled with local styling */
+    position:relative;
+}
+#indaba-powered {
+    background:url(../image/indaba-powered.png) no-repeat left bottom;
+    bottom:0;
+    display:block;
+    height:30px;
+    left:0;
+    position:absolute;
+    width:92px;
+}
+#back-link {
+    display:inline-block;
+    margin-bottom:10px;
+}
+#journal-title{
+}
+#journal-body {
+}
+#journal-sidebar {
+	background-color:#eee;
+	border:1px solid #888;
+	float:right;
+	margin:0 0 1em 1em;
+	padding:10px;
+	width:240px; /* Jonathan Eyler-Werve incresed width to 240px. */
+}
+#journal-sidebar h3,
+#journal-sidebar h4 {
+	margin-top:0;
+}
+.journal-sidebar-item {
+	border-bottom:1px dashed #888;
+	margin-bottom:10px;
+	padding-bottom:5px;
+}
+.journal-review-item {
+    margin-bottom:10px;
+}
+.journal-sidebar-item h4,
+.journal-review-item h4{ /* Jonathan Eyler-Werve removed rounded box styling. */
+    padding: 4px 0px;
+    display:inline-block;
+    font-weight:bolder;
+}
+.journal-sidebar-item p {
+	margin-bottom:5px;
+}
+
+table#question-set-table  {
+
+}
+
+#stat-p { /* Jonathan Eyler-Werve removed color. */
+    /* color:#5127bd; */
+    font-size:1.1em;
+}
+div.question-set h4 { /* Jonathan Eyler-Werve removed rounded corners, increased top margin. */
+    background-color:#eee;
+    font-size:1.1em;
+    margin-top:18px;
+    padding: 10px 15px 10px 15px;
+}
+div.question-item { /* Jonathan Eyler-Werve spacing changes. removed bg color. removed 1px margin. added border */
+    border-top: solid 1px #666;
+    padding:5px 15px 5px 15px;
+}
+div.question-item h5 { /* Jonathan Eyler-Werve spacing changes. */
+    font-style:normal;
+    font-weight:bold;
+    margin-bottom:15px;
+	margin-top:15px;
+}
+div.score { /* Jonathan Eyler-Werve spacing changes. */
+	padding-left: 35px;
+	margin-bottom: 15px;
+}
+
+div.question-item-p { /* Jonathan Eyler-Werve spacing changes. */
+    margin-bottom:10px;
+	padding-left: 35px;
+}
+
+div.question-item-p em{
+    line-height:22px;
+}
+
+
+pre {
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
+}
+span.options {
+    background-color:#fff;
+    display:inline-block;
+    -moz-border-radius:10px;
+    -webkit-border-radius:10px;
+    border-radius:10px;
+
+}
+span.options span,
+span.options span.selected { /* JEW: changed color, expanded radius, added padding to center text in border */
+    display:inline-block;
+    height:18px;
+    padding-left:8px;
+    padding-right:8px;
+	padding-top:3px;
+}
+span.options span.selected {
+    background-color:#ff6;
+    color:#000;
+    -moz-border-radius:12px;
+    -webkit-border-radius:12px;
+    border-radius:12px;
+	border: solid 1px black;
+}
+div.score {
+    margin-bottom:5px;
+    position:relative;
+}
+div.score span.q-mark {
+    background:url(../image/question-mark.png) no-repeat left top;
+    display:inline-block;
+    height:18px;
+    margin:0;
+    margin-left:5px;
+    padding:0;
+    position:relative;
+    top:5px;
+    width:18px;
+}
+#tiptip_content {
+    font-size:11px;
+}
+#tiptip_content h5 {
+    font-size:12px;
+    font-weight:bold;
+    padding:3px 0;
+}
+#tiptip_content hr {
+    border:0;
+    border-top:0px dashed #fff;
+    height:1px;
+    margin:0 auto;
+}
+#tiptip_content em.category {
+    color:#f00;
+    font-weight:bold;
+}
+span.q-mark:hover div.tip {
+    display:block;
+}
+em.category { /* jonathan removed color */
+    font-style:normal;
+	font-weight: bolder;
+
+}
+#target-div {
+    position:relative;
+}
+#target-table {
+    left:0;
+    position:absolute;
+    top:0;
+}
+#target-table td, tr { /* Jonathan added this */
+	padding-left: 10px;
+	padding-right: 0px;
+}
+
+
+#answer-panel {
+    display:none;
+    padding-top:15px;
+	border-width: 0px;
+}
+
+#answer-tip {
+    background-color:#f2d88b;
+    border:1px solid #999;
+    font-size:12px;
+    padding:10px;
+}
+
+tr.selected {
+    background-color:#ff6;
+    border:2px solid #888;
+    border-right:0;
+    color:#000;
+
+}
+tr.selected td {
+}
+tr.selected a:link,
+tr.selected a:visited,
+tr.selected a:active {
+    color:#000;
+}
+
+.cls-very-weak em, .cls-weak em, .cls-moderate em, .cls-strong em, .cls-very-strong em,
+.cls-no-score em {
+    display:inline-block;
+    font-size:1.1em;
+    text-align:right;
+    width:36px;
+    color:#000;
+    font-style: normal;
+
+}
+.cls-very-weak label, .cls-weak label, .cls-moderate label, .cls-strong label, .cls-very-strong label,
+.cls-no-score label {
+    /* -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px; */
+    display:inline-block;
+    font-size:10px;
+    margin:2px 0 2px 10px;
+    padding:0px 5px ;
+    text-transform:uppercase;
+    font-weight: normal;
+}
+
+.cls-very-weak label {
+    border-left: 18px solid #df0000;
+}
+.cls-weak label {
+    border-left: 18px solid #ff6600;
+}
+.cls-moderate label {
+    border-left: 18px solid #ffcc00;
+}
+.cls-strong label {
+    border-left: 18px solid #66cc00;
+}
+.cls-very-strong label {
+    border-left: 18px solid #009900;
+}
+.cls-no-score label {
+    border-left: 18px solid #ccc;
+}
+
+.sparkline-item {
+    clear:both;
+    height:25px;
+/*    width:300px;*/
+}
+.sparkline-item label {
+    display:block;
+    float:left;
+    line-height:25px;
+    text-align:right;
+    width:100px;
+}
+.sparkline-item div {
+    float:right;
+}
+
+	/* DATA SUMMARY - WIDGET - TEXT AND LAYOUT STYLES */
+
+#dataSummary { /* adjusting line height to tighten the charts together */
+    line-height:0px;
+}
+	
+#dataSummary  #baseInfo { /* stying the intro text on top */
+	text-align: center;
+	font-size: 11px;
+	line-height: 14px;
+}	
+
+#dataSummary  #baseInfo #title, #dataSummary  #baseInfo #targetName { /* widget title in bold */
+	font-weight: bolder;
+	font-size: 13px;
+}
+
+.large #dataSummary #baseInfo,
+.large #dataSummary #baseInfo #title,
+.large #dataSummary #baseInfo #targetName,
+.large #dataSummary #baseInfo #studyPeriod,
+.large #dataSummary #chartTitle,
+.large #indicatorSummary #baseInfo,
+.large #indicatorSummary #baseInfo #title,
+.large #indicatorSummary #baseInfo #targetName,
+.large #indicatorSummary #baseInfo #studyPeriod,
+.large #indicatorSummary #chartTitle,
+.large #indicatorSummary #charts #cat_0,
+.large #indicatorSummary #charts #cat_1,
+.large #indicatorSummary #charts #cat_2,
+.large #indicatorSummary #charts #cat_3,
+.large #indicatorSummary #charts #cat_4,
+.large #indicatorSummary #charts #cat_5{
+    font-size:150%;
+    line-height:100%;
+}
+
+#dataSummary  #baseInfo #studyPeriod { /* widget subtitle */
+	font-size:13px;
+}
+
+#dataSummary  #chartTitle { /* styles the second widget headline. */
+	font-weight: bolder;
+	font-size: 13px;
+	margin-bottom: 5px; /* adding some space because line height is small */
+	margin-top: 5px;
+	display: block;
+}
+
+#dataSummary #gapLabel { /* TEMPORARY WORKAROUND BECAUSE THIS DISPLAYS WRONG DATA LABEL */
+	display: none; /* deactivates data label until it can be updated */
+}
+
+	/* INDICATOR SUMMARY - WIDGET - TEXT AND LAYOUT STYLES */
+
+	
+#indicatorSummary #baseInfo { /*centering text, making the headlines bold */
+	text-align: center;
+}	
+
+#indicatorSummary  #baseInfo #title, #indicatorSummary  #baseInfo #targetName { /* widget title in bold */
+	font-weight: bolder;
+	font-size: 13px;
+}
+
+
+
+#indicatorSummary #chartTitle { /* making a smaller subhead */
+	font-size: 11px;
+	line-height: 14px;
+	margin-bottom: 10px;
+	display: block;
+}
+
+#indicatorSummary #charts  #cat_0, #indicatorSummary #charts  #cat_1, #indicatorSummary #charts  #cat_2, #indicatorSummary #charts  #cat_3, #indicatorSummary #charts  #cat_4, #indicatorSummary #charts  #cat_5  {
+	line-height: 10px;
+	font-size: 11px;
+    margin-top: -10px;
+    margin-bottom: -10px;
+	color: #666;
+	
+}
+
+/* end indicators summary widget */
+
+
+
+
+

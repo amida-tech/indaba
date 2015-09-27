@@ -1,0 +1,28 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>Vertical Card Widget</title>
+        <script type="text/javascript" src="../indaba_widget.js"></script>
+        <script type="text/javascript">
+            function onLoad()
+            {
+                var ss = location.href.split('/');
+                ss = ss.slice(0, -2);
+                var widget = 'vcardDisplay.html?frameId=frame1&horseId=1&version=1';
+                ss.push(widget)
+                var src = ss.join('/');
+
+                ss = ss.slice(0, -1);
+                ss.push('indaba_widget_helper.html');
+                var helper = ss.join('/');
+
+                document.getElementById('frame1').src = src + '&helper=' + encodeURIComponent(helper);
+            }
+        </script>
+    </head>
+    <body onload="onLoad()">
+        <h1>Vertical Card Widget</h1>
+        <iframe id="frame1" frameborder="0" src="" width="800" scrolling="no"></iframe>
+    </body>
+</html>

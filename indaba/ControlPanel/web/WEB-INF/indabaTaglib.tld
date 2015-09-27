@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+
+<!--
+    $Id: struts-html.tld 481833 2006-12-03 17:32:52Z niallp $
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>indaba</short-name>
+    <tag>
+        <name>msg</name>
+        <tag-class>com.ocs.indaba.tag.MessageTagHandler</tag-class>
+        <display-name>message</display-name>
+        <body-content>jsp</body-content>
+        <description>
+        Format a message (using java.text.MessageFormat) from the value
+        resulting from looking up the provided key within the default or
+        specified resource bundle. Arguments to MessageFormat can be
+        supplied as an object array or as subtags within the message tag body.
+        Message tags require that a default bundle be provided (by placing
+        a bundle tag prior to the message tag) or that a bundle or bundleRef
+        attribute be supplied to the tag.
+        </description>
+        <attribute>
+            <name>key</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+          The key to use when retrieving the display message format from the
+          ResourceBundle.
+            </description>
+        </attribute>
+        <attribute>
+            <name>args</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+          Provides an array of args for use with java.text.MessageFormat when
+          formatting the display text. This is an alternative to using arg
+          subtags.
+            </description>
+        </attribute>
+        <attribute>
+            <name>debug</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+          Set to "true" to log debugging messages.
+            </description>
+        </attribute>
+    </tag>
+    <tag>
+        <name>arg</name>
+        <tag-class>com.ocs.indaba.tag.MessageArgumentTagHandler</tag-class>
+        <body-content>empty</body-content>
+        <display-name>msgArg</display-name>
+        <description>
+        The arg tag is a simpler (and usually more readable) alternative
+        to using the Message tag's args attribute for specifying arguments to
+        MessageFormat. Note that if you use arguments for your message tags,
+        java.util.MessageFormat puts some restrictions on the characters you
+        are allowed to use.  The one that is most likely to affect you is the
+        requirement that single apostrophies should be escaped by another
+        apostrophe (so, you replace ' with '' in your resource bundle
+        properties file).
+        Must reside inside the body of a message tag.
+        </description>
+        <summary>
+        Specifies arguments to be used by the message tag's MessageFormat.
+        </summary>
+        <attribute>
+            <name>value</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+          This attribute is to replace a positional variable in the message
+          text. See the javadoc api for java.text.MessageText
+            </description>
+        </attribute>
+        <example>
+Provide a date and number to be formatted in the message in the right location and according to the user's locale.
+&lt;indaba:msg key="test2"&gt; 
+   &lt;i18n:arg value="&lt;%= dateArg %&gt;" /&gt; 
+   &lt;i18n:arg value="&lt;%= numberArg %&gt;" /&gt; 
+&lt;/indaba:nmsg&gt;
+        </example>
+    </tag>
+  
+</taglib>

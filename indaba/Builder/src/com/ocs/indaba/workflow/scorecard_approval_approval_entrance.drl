@@ -1,0 +1,20 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Report Horse Completion"
+    when
+        goalObject: GoalObject()
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        taIndex: Integer()
+
+        eval(taIndex == 1)
+    then
+    	// System.out.println("=====<<<< REPORT HORSE COMPLETION >>>>======");
+        siteMessageService.postToProjectWall(ta, Constants.NOTIFICATION_TYPE_POST_HORSE_COMPLETED);
+end
+

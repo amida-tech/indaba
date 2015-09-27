@@ -1,0 +1,191 @@
+/* for this demo only */
+/*#nav {margin:20px 0 80px 0;}*/
+
+#header {width:1025px; background:#EBEBE4; position:relative;}
+
+#indaba-logo {
+    text-align: left;
+    float: left;
+    display: inline;
+    width: 156px;
+}
+
+/* the styling */
+#nav {
+    float:left;
+    width:818px;
+    height:auto;
+    background:#EBEBE4 url("../images/bottom_line.gif") repeat-x bottom;
+    position:relative;
+}
+
+#nav .select, #nav .current {
+    margin:0;
+    padding:0;
+    list-style:none;
+    display:block;
+}
+
+#nav li {
+    display:inline;
+    margin:0;
+    padding:0;
+    height:auto;
+}
+
+#nav .select a,
+#nav .current a {
+    display:block;
+    height:21px;
+    float:left;
+    background: url("../images/left_blue.gif") no-repeat left top;
+    padding:0 0 0 3px;
+    border-bottom:1px solid #000;
+    text-decoration:none;
+    font-size:12px;
+    line-height:20px;
+    white-space:nowrap;
+    margin-left:2px;
+}
+* html #nav .select a, * html #nav .current a {width:1px;}
+
+#nav .select a b,
+#nav .current a b {
+    height:100%;
+    display:block;
+    background:url("../images/right_blue.gif") no-repeat right top;
+    padding:0 6px 0 3px;
+    color:#000;
+}
+
+#nav .select a:hover,
+#nav .select li:hover a {
+    background-position:0 -75px;
+    border-color:#046;
+    cursor:pointer;
+}
+
+#nav .select a:hover b,
+#nav .select li:hover a b {
+    background-position:100% -75px;
+    border-color:#046; color:#fff;
+}
+
+#nav .sub {display:none;}
+
+/* for IE5.5 and IE6 only */
+#nav table {
+    position:absolute;
+    border-collapse:collapse;
+    left:0;
+    top:0;
+    font-size:12px;
+}
+
+#nav .current a {
+    background-position:0 -75px;
+    border-color:#046;
+}
+#nav .current a b {
+    background-position:100% -75px;
+    color:#ff6;
+}
+
+
+#nav .sub li a:hover,
+#nav .select a:hover .sub li a:hover,
+#nav .select li:hover .sub li a:hover {
+    background:#005984 url("../images/sub_sep.gif") top right no-repeat;
+    color:#fff;
+    text-decoration:none;
+}
+
+#nav .sub_active .current_sub a,
+#nav .sub_active a:hover {
+    background:#005984 url("../images/sub_sep.gif") top right no-repeat;
+    color:#ff6;
+    text-decoration:none;
+}
+
+#nav .select li a:hover .sub,
+#nav .select li:hover .sub {
+    display:block;
+    position:absolute;
+    width:818px;
+    top:21px;
+    left:0;
+    background:#005984;
+    margin-top:1px;
+    padding:0;
+    z-index:100;
+    border-bottom:0px solid #fff;
+}
+
+#nav .sub, #nav .sub_active {
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+#nav .sub_active {
+    display:block;
+    position:absolute;
+    width:818px;
+    top:21px;
+    left:0;
+    background:#005984;
+    margin-top:1px;
+    padding:0;
+    z-index:10;
+    color:#000;
+    border-bottom:0px solid #EBEBE4;
+}
+* html #nav .sub_active, * html #nav .select a:hover .sub {
+    z-index:-1;
+    margin-top:0;
+    margin-t\op:1px;
+}
+
+#nav .sub_active a {
+    height:25px;
+    float:left;
+    text-decoration:none;
+    line-height:24px;
+    white-space:nowrap;
+    font-weight:normal;
+}
+#nav .sub_active a,
+#nav .select a:hover .sub li a,
+#nav .select li:hover .sub li a {
+    display:inline;
+    background:#005984 url("../images/sub_sep.gif") top right no-repeat;
+    padding:0 10px;
+    margin:0;
+    font-size:12px;
+    width:auto;
+    white-space:nowrap;
+    font-weight:normal;
+    border:0;
+    color:#fff;
+    height:25px;
+    line-height:24px;
+}
+
+#userlogin {
+    display: inline;
+    text-align: right;
+    float: right;
+    padding-right: 10px;
+}
+
+#userlogin a {
+    text-decoration: none;
+} 
+
+#userlogin a:hover {
+    color: tomato;
+} 
+
+#userlogin span {
+    color: darkgreen;
+    font-weight: bold;
+}

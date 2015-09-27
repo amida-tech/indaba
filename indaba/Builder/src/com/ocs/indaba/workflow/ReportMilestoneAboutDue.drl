@@ -1,0 +1,20 @@
+package com.ocs.indaba.workflow
+
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.po.Goal;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Report Milestone About Due"
+    when
+        ta: TaskAssignment()
+        goal: Goal()
+        goalObject: GoalObject()
+	siteMessageService: SiteMessageService()
+        eval((new Date()).getTime()-goalObject.getEnterTime().getTime() >= (goal.getDuration()-5)*1000*60*60*24)
+    then
+    	System.out.println("=====<<<< REPORT MILESTONE ABOUT DUE >>>>======");
+        siteMessageService.reportToProjectAdmin(goalObject, ta, Constants.NOTIFICATION_TYPE_ALERT_ABOUT_DUE);
+end
+

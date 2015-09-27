@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Horizontal Scorecard Display</title>
+    <link rel="stylesheet" href="css/tipTip.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <style type="text/css">
+        th, td {
+            border:0;
+            border-bottom:1px solid #888;
+            padding:4px 8px 4px 0;
+            text-align:left;
+        }
+        th {text-align:center;}
+        tr.selected td,
+        tr.clear td,
+        th.clear,
+        td.clear {
+            border-bottom:0;
+        }
+        tr, tr.clear {
+            border:0;
+        }
+
+        div.question-item {
+            border:2px solid #888;
+        }
+        a.no-target:hover{
+            cursor:default;
+            text-decoration:none;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tipTip.js"></script>
+    <script type="text/javascript" src="js/widget.common.js"></script>
+    <script type="text/javascript" src="js/jquery.tablesorter.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document.body).append('<div class="loading"></div>');
+            
+            var productId = $WIDGET.getUrlParameter('productId');
+            var subcatId = $WIDGET.getUrlParameter('subcatId');
+            var questionId = $WIDGET.getUrlParameter('questionId');
+            var selectedHorseId = $WIDGET.getUrlParameter('selectedHorseId');
+            var url;
+            if (subcatId){
+                url = '../hcardSubcatSummary.do?productId='+productId+'&subcatId='+subcatId;
+                $('#answer-tip > span').hide();
+            }
+            else{
+                url = '../hcardQuestionSummary.do?productId='+productId+'&questionId='+questionId;
+            }
+
+            $('#back-link').attr('href', 'hcardDisplay.html?'+$WIDGET.getParamUrlComponent('subcatId', 'questionId', 'selectedHorseId'));
+            
+            var tbl = $('#target-table');
+            var pnl = $('#answer-panel');
+
+            $.getJSON(url, function(json){
+                $('h2#title').text(json.productDesc);
+                if (subcatId)
+                    $('#question-text').text(json.subcatName);
+                else
+                    $('#question-text').text(json.questionText);
+                
+                var html = '';
+                for (var i=0; i<json.data.targets.length; i++){
+                    var t = json.data.targets[i];
+                    html += '<tr><td><a class="' + (subcatId ? 'no-target' : 'target') + '" href="#" horseId="'+t.horseId+'">'+t.targetName+'</a></td>';
+                    html += '<td>'+$WIDGET.getStrongnessHtml(t.scoreValue, t.scoreLabel, false, t.useScore)+'</td><td class="clear"></td></tr>';
+                }
+                $('tbody', tbl).append(html);
+                $('#target-div').height(tbl.height());
+                tbl.tablesorter({
+                    textExtraction: function(node) {
+                        if ($(node).has('em').length > 0 && !isNaN($('em', node).text()))
+                            return pad($('em', node).text(), 3);
+                        else
+                            return $(node).text();
+                    }
+                });
+
+                // sort Target initially
+                $('th:eq(0)', '#target-table').click();
+
+                tbl.bind('sortEnd', adjustAnswerPanel);
+                $('a.target').click(showAnswer);
+                $('a.no-target').click(function(){return false;});
+
+                pnl.show().css('margin-left', tbl.outerWidth()-2+'px');
+
+                $('.loading').remove();
+                $WIDGET.widgetResizePipe('HCARD_DISPLAY_TARGET');
+
+                // deep linking
+                if (selectedHorseId)
+                    $('a[horseId='+selectedHorseId+']').trigger('click');
+            });
+        });
+
+        function pad(number, length) {
+            var str = '' + number;
+            while (str.length < length) {
+                str = '0' + str;
+            }
+            return str;
+        }
+
+        function adjustAnswerPanel(){
+            $('tr.clear').removeClass('clear');
+            var tr = $('tr.selected');
+            var qi = $('.question-item');
+            if (tr.length > 0){
+                var top = tr.offset()['top'];
+                top -= $('#answer-panel').offset()['top'];
+                // padding-top
+                var ptop = parseInt($('#answer-panel').css('padding-top'));
+                ptop = isNaN(ptop) ? 0 : ptop;
+                top = top-ptop-qi.outerHeight()/2+tr.outerHeight()/2
+                top = Math.min($('table').outerHeight()-qi.outerHeight(), top);
+                top = Math.max(top, 0);
+                qi.css('margin-top', top+'px');
+
+                // remove previous tr border-bottom
+                if (tr.prev().length > 0)
+                    tr.prev().addClass('clear');
+                else
+                    $('thead>tr').addClass('clear');
+            }
+        }
+
+        function showAnswer(){
+            $('tr.selected').removeClass('selected');
+            $(this).closest('tr').addClass('selected');
+            
+            var horseId = $(this).attr('horseId');
+            var questionId = $WIDGET.getUrlParameter('questionId');
+            var url = '../scorecardAnswer.do?horseId='+horseId+'&questionId='+questionId;
+            $.getJSON(url, function(json){
+                var q = json.data;
+                html = '<div class="question-item">';
+                // score
+                html += '<div class="score"><em class="category">Score:</em> ';
+                html += '<span class="options">';
+                if (q.options){
+                    for (var k=0; k<q.options.length; k++){
+                        var tag = q.options[k].selected ? '<span class="selected">' : '<span>';
+                        html += tag+q.options[k].label+'</span>';
+                    }
+                }
+                html += '</span>';
+
+                // score criteria tip
+                html += '<span class="q-mark">';
+                html += '</span>';
+                html += '</div>';
+
+                // comments, references and reviews
+                if (q.comments && $.trim(q.comments).length>0)
+                    html += '<div class="question-item-p"><em class="category">Comments: </em><pre>'+q.comments+'</pre></div>';
+                if (q.references && $.trim(q.references).length>0)
+                    html += '<div class="question-item-p"><em class="category">References: </em><pre>'+q.references+'</pre></div>';
+                if (q.reviews){
+                    for (var k=0; k<q.reviews.length; k++)
+                        if ($.trim(q.reviews[k]).length > 0){
+                            html += '<div class="question-item-p"><em class="category">Peer Review Comments: </em><pre>'+q.reviews[k]+'</pre></div>';
+                        }
+                }
+                html += '</div>';
+                $('#answer-panel').html(html);
+
+                // tipTip
+                var tip = '<h5>Scoring Criteria</h5>';
+                var cs = [];
+                if (q.options){
+                    for (var k=0; k<q.options.length; k++){
+                        cs.push('<p><strong><em class="category">'+q.options[k].label+':</em></strong> '+q.options[k].criteria+'</p>');
+                    }
+                }
+                tip += cs.join('<hr/>');
+                $('span.q-mark').tipTip({
+                    defaultPosition:'bottom',
+                    maxWidth:'300px',
+                    content:tip
+                });
+
+                adjustAnswerPanel();
+            });
+            return false;
+        }
+
+        /*
+        function getPermlink(){
+            var url = location.href;
+            if ($('tr.selected').length > 0){
+                $WIDGET.setParameter('selectedHorseId', $('tr.selected a').attr('horseId'));
+                url = url.replace(location.search, $WIDGET.newLocationSearch());
+            }
+            $('#permlink').val(url);
+        }
+        */
+    </script>
+</head>
+<body>
+    <div class="widget-container">
+        <h2 id="title"></h2>
+        <h3 id="question-text"></h3>
+        <a id="back-link" href="hcardDisplay.html">Back</a>
+        <div id="target-div">
+            <table id="target-table">
+                <thead>
+                    <tr class="category">
+                        <th>Target</th>
+                        <th>Score</th>
+                        <th width="20" class="clear"></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div id="answer-panel">
+                <div id="answer-tip">
+                    Table on the left is sortable via clicking on the column header. <span>Clicking on each target will also display results in the right panel.</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

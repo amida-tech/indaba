@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+.collapsible,
+.page_collapsible,
+.accordion {
+    margin: 0;
+    padding:10px;
+    height:20px;
+
+ 	border-top:#f0f0f0 1px solid;
+        background: #DDDDDD;
+
+	font-family: Arial, Helvetica, sans-serif;
+    text-decoration:none;
+    text-transform:uppercase;
+    color: #000;
+    font-size:1em;
+}
+.accordion-open,
+.collapse-open {
+	background:#BBBBBB;
+	color: #fff;
+}
+.accordion-open span,
+.collapse-open span {
+	display:block;
+	float:right;
+	padding:10px;
+}
+.accordion-open span,
+.collapse-open span {
+	background:url(collapse_icon.png) center center no-repeat;
+}
+.accordion-close span,
+.collapse-close span {
+	display:block;
+	float:right;
+	background:url(expand_icon.png) center center no-repeat;
+	padding:10px;
+}
+

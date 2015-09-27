@@ -1,0 +1,60 @@
+{
+    "groups":
+            [
+                {
+                    "objId": 1,
+                    "name": "Group 1",
+                    "description": "This is group description 1.",
+                    "canManageComments": true,
+                    "uiState": {
+                        "flagButtonState": 1,
+                        "textBoxState": 2,
+                        "titleBarState": 1
+                    }
+                },
+                {
+                    "objId": 2,
+                    "name": "Group 2",
+                    "description": "This is group description 2.",
+                    "canManageComments": false,
+                    "uiState": {
+                        "flagButtonState": 2,
+                        "textBoxState": 1,
+                        "titleBarState": 2
+                    }
+                },
+                {
+                    "objId": 3,
+                    "name": "Group 3",
+                    "description": "This is group description 3.",
+                    "canManageComments": false,
+                    "uiState": {
+                        "flagButtonState": 3,
+                        "textBoxState": 1,
+                        "titleBarState": 2
+                    }
+                },
+                {
+                    "objId": 4,
+                    "name": "Group 4",
+                    "description": "This is group description 4.",
+                    "canManageComments": false,
+                    "uiState": {
+                        "flagButtonState": 4,
+                        "textBoxState": 1,
+                        "titleBarState": 2
+                    }
+                },
+                {
+                    "objId": 5,
+                    "name": "Group 5",
+                    "description": "This is group description 5.",
+                    "canManageComments": false,
+                    "uiState": {
+                        "flagButtonState": 5,
+                        "textBoxState": 1,
+                        "titleBarState": 2
+                    }
+                }
+            ]
+}

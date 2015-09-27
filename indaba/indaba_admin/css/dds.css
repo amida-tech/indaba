@@ -1,0 +1,39 @@
+.panel {float:left;width:200px;margin:20px;}
+
+.dds_selected {
+    background:#ffc;
+}
+.dds_ghost {
+    opacity:0.5;
+}
+.dds_move {
+    background:#cfc;
+}
+.dds_hover {
+    background:#fc9;
+    border:3px dashed #c96;
+}
+
+.holder {
+    border:3px dashed #333;
+    background:#fff;
+}
+
+.ul {
+    list-style-type:none;
+    border:1px solid #999;
+    background:#ccc;
+    padding:20px;
+    min-height:150px;
+    width:130px;
+}
+
+.li {
+    display:block;
+    border:1px solid #999;
+    background:#fff;
+    width:120px;
+#    padding:5px 10px;
+#    margin-bottom:5px;
+}
+

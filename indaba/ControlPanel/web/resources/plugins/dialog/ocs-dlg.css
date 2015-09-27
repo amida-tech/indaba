@@ -1,0 +1,26 @@
+/* 
+    Document   : ocs-dlg
+    Created on : 2012-6-8, 12:28:03
+    Author     : Administrator
+    Description:
+        Purpose of the stylesheet follows.
+*/
+#ocsdlg.alert{
+    background: url(images/alert.png) no-repeat scroll 12px 10px;
+}
+#ocsdlg.error{
+    background: url(images/error.png) no-repeat scroll 12px 10px;
+}
+#ocsdlg.success{
+    background: url(images/success.png) no-repeat scroll 12px 10px;
+}
+#ocsdlg.confirm{
+    background: url(images/confirm.png) no-repeat scroll 12px 10px;
+}
+#ocsdlg.info{
+    background: url(images/info.png) no-repeat scroll 12px 10px;
+}
+
+#ocsdlg .ocsdlg-msg {
+    margin-left: 32px; padding-top: 8px;
+}

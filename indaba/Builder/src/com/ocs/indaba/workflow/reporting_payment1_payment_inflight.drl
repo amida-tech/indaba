@@ -1,0 +1,22 @@
+package com.ocs.indaba.workflow
+
+import java.util.Date;
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.service.SiteMessageService;
+import com.ocs.indaba.util.DateUtils;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.CaseService;
+
+
+rule "Check task overdue 1"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() != Constants.TASK_STATUS_DONE)
+        eval((new Date()).getTime()-ta.getDueTime().getTime() >= 2*1000*60*60*24)
+    then
+    	// System.out.println("=====<<<< CHECK TASK OVERDUE 1 >>>>======");
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_NOTICE1_TASK_OVERDUE);
+end
+

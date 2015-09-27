@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+"http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<!--
+    $Id: struts-html.tld 481833 2006-12-03 17:32:52Z niallp $
+
+    Licensed to the Apache Software Foundation (ASF) under one or more
+    contributor license agreements.  See the NOTICE file distributed with
+    this work for additional information regarding copyright ownership.
+    The ASF licenses this file to You under the Apache License, Version 2.0
+    (the "License"); you may not use this file except in compliance with
+    the License.  You may obtain a copy of the License at
+
+         http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+-->
+<taglib>
+    <tlib-version>1.0</tlib-version>
+    <jsp-version>2.0</jsp-version>
+    <short-name>indaba</short-name>
+    <tag>
+        <name>step</name>
+        <tag-class>com.ocs.indaba.aggregation.tag.StepTagHandler</tag-class>
+        <body-content>JSP</body-content>
+        <attribute>
+            <name>name</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                action name
+            </description>
+        </attribute>
+        <attribute>
+            <name>steps</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                total steps
+            </description>
+        </attribute>
+        <attribute>
+            <name>current</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                current step
+            </description>
+        </attribute>
+        <attribute>
+            <name>link</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                curstomized url link
+            </description>
+        </attribute>
+        <attribute>
+            <name>quit</name>
+            <required>false</required>
+            <rtexprvalue>true</rtexprvalue>
+            <description>
+                curstomized quit link
+            </description>
+        </attribute>
+    </tag>
+</taglib>

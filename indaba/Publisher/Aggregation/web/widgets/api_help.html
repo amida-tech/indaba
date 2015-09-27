@@ -1,0 +1,76 @@
+<!--
+Copyright 2010 OpenConcept Systems,Inc. All rights reserved.
+Document   : workset
+Created on : Mar 23, 2012, 18:26:15 PM
+Author     : Jeff Jiang
+-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+    <head>
+        <title>Indaba Publisher | Data Services Widget APIs</title>
+        <link type="text/css" rel="stylesheet" href="../css/style.css"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+            <style type="text/css">
+               .api {
+                    border: 1px solid #eee;
+                    padding: 10px 0px;
+                }
+                .mark {
+                    font-weight: bold;
+                }
+                .l1 {
+                    margin-left: 10px;
+                }
+                .l2 {
+                    margin-left: 20px;
+                }
+                .l3 {
+                    margin-left: 30px;
+                }
+                .l4 {
+                    margin-left: 40px;
+                }
+                .attr {
+                    color: #416aa3;
+                }
+                .comment {
+                    font-style: italic;
+                    color: #008040;
+                }
+                h3 {
+                    text-align: left;
+                    margin-left: 30px;
+                }
+            </style>
+    </head>
+    <body>
+        <div id="indaba">
+            <div class="interactive" style=" margin-top: 20px; padding-top: 10px;">
+                <h1>Introduction of Indaba Data Services Widget APIs</h1>
+                <h3>Horizontal Scorecard Sub-Category Summary</h3>
+                <div id="hcardSubcatSummary" class="wrapper api">
+                        <div class="mark l1">{</div>
+                        <div class="l2">&quot;<span class="attr">productDesc</span>&quot;: &quot;A national-level assessment of anti-corruption mechanisms.&quot;&nbsp;&nbsp;<span class="comment">// [STRING] Product description</span></div>
+                        <div class="l2">&quot;<span class="attr">subcatName</span>&quot;: &quot;Anti-Corruption Non-Governmental Organizations&quot;&nbsp;&nbsp;<span class="comment">// [STRING] Sub category name</span></div>
+                        <div class="l2">&quot;<span class="attr">surveyName</span>&quot;: &quot;Integrity Indicators&quot;&nbsp;&nbsp;<span class="comment">// [STRING] Survey name</span></div>
+                        <div class="l2">&quot;<span class="attr">version</span>&quot;: &quot;1.0&quot;&nbsp;&nbsp;<span class="comment">// [STRING] API version</span></div>
+                        <div class="l2">&quot;<span class="attr">data</span>&quot;: </div>
+                        <div class="mark l2">{</div>
+                        <div class="l3">&quot;<span class="attr">targets</span>&quot;: &nbsp;&nbsp;<span class="comment">// [ARRAY] Array of target</span></div>
+                        <div class="mark l3">[</div>
+                        <div class="mark l4">{</div>
+                        <div class="l4">&quot;<span class="attr">targetName</span>&quot;: &quot;Albania&quot;&nbsp;&nbsp;<span class="comment">// [STRING] Target name</span></div>
+                        <div class="l4">&quot;<span class="attr">horseId</span>&quot;: 1&nbsp;&nbsp;<span class="comment">// [INT] Horse id</span></div>
+                        <div class="l4">&quot;<span class="attr">useScore</span>&quot;: ;true&nbsp;&nbsp;<span class="comment">// [BOOL] Use score or not? true: the scoreValue is available; false: ignore scoreValue.</span></div>
+                        <div class="l4">&quot;<span class="attr">scoreValue</span>&quot;: 60.41666666666667&nbsp;&nbsp;<span class="comment">// [FLOAT] The mean of question set  under this sub category</span></div>
+                        <div class="l4">&quot;<span class="attr">scoreLabel</span>&quot;: &quot;Strong&quot;&nbsp;&nbsp;<span class="comment">// [STRING] Display label for the scoreValue. OPTIONS: Very Strong, Strong, Weak, Very Weak</span></div>
+                        <div class="mark l4">},</div>
+                         <div class="mark l4">...</div>
+                        <div class="mark l3">]</div>
+                        <div class="mark l2">}</div>
+                        <div class="mark l1">}</div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

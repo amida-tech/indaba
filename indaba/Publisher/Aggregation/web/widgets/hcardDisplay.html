@@ -1,0 +1,118 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Horizontal Scorecard Display</title>
+    <link rel="stylesheet" href="css/common.css" />
+    <style>
+        ul li{
+            list-style-type:none;
+        }
+        .publicName{
+            color:#666;
+            display:inline-block;
+            width:28px;
+        }
+        .subcat h4{
+            background-color:#eee;
+            border:1px solid #ccc;
+            margin-bottom:1em;
+            padding:5px;
+            position:relative;
+        }
+        .subcat h4:hover{
+            background-color:#ccc;
+            cursor:pointer;
+        }
+        .subcat h4 img{
+            border:none;
+            height:12px;
+            position:absolute;
+            right:10px;
+            top:6px;
+            width:12px;
+        }
+        .subcat h4 a{
+            color:#000;
+        }
+        .subcat h4 a:hover{
+            color:#f00;
+        }
+        .subcat ul{
+            display:none;
+        }
+    </style>
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script type="text/javascript" src="js/widget.common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document.body).append('<div class="loading"></div>');
+            
+            var productId = $WIDGET.getUrlParameter('productId');
+            var url = '../hcardSummary.do?productId='+productId;
+            $.getJSON(url, function(json){
+                $('h2#title').text(json.productDesc);
+                var html = '';
+                for (var i=0; i<json.data.length; i++){
+                    for (var j=0; j<json.data[i].categories.length; j++){
+                        var subcat = json.data[i].categories[j];
+                        $('<div id="subcat-'+subcat.categoryId+'" class="subcat"/>').appendTo('.widget-container');
+                        var sc = $('#subcat-'+subcat.categoryId);
+                        $WIDGET.deleteParameter('questionId');
+                        $WIDGET.setParameter('subcatId', subcat.categoryId);
+                        sc.append('<h4><a href="hcardDisplayTargets.html?'+$WIDGET.getParamUrlComponent()+'">'+subcat.title+'</a><img src="../images/arrow-down.png" border="0" title="expand"/></h4>');
+                        sc.append('<ul/>');
+                        for (var k=0; k<subcat.categories.length; k++){
+                            for (var l=0; l<subcat.categories[k].questions.length; l++){
+                                var q = subcat.categories[k].questions[l];
+                                $WIDGET.deleteParameter('subcatId');
+                                $WIDGET.setParameter('questionId', q.questionId);
+                                $('ul', sc).append('<li><label class="publicName">'+q.publicName+'</label>  <a href="hcardDisplayTargets.html?'+$WIDGET.getParamUrlComponent()+'">'+q.questionText+'</a></li>');
+                            }
+                        }
+                    }
+                }
+                
+                // retrieve subcat openness states from cookie
+                $('.subcat').each(function(){
+                    if ($.cookie(this.id)){
+                        $('ul', this).show();
+                        $('img', this).attr('src', '../images/arrow-up.png');
+                    }
+                });
+
+                $('.loading').remove();
+                $WIDGET.widgetResizePipe('HCARD_DISPLAY');
+                
+                // handle subcat group
+                $('.subcat').click(function(){
+                    $('ul', this).toggle();
+                    var arrowImg = $('img', this);
+                    if (arrowImg.attr('src').indexOf('up')>-1){
+                        $.cookie(this.id, null);
+                        arrowImg.attr('src', '../images/arrow-down.png');
+                        arrowImg.attr('title', 'expand');
+                    }
+                    else{
+                        $.cookie(this.id, 1);
+                        arrowImg.attr('src', '../images/arrow-up.png');
+                        arrowImg.attr('title', 'collapse');
+                    }
+                    $WIDGET.widgetResizePipe('HCARD_DISPLAY');
+                });
+                
+                $('.subcat>h4>a').add('.subcat>ul>li>a').click(function(){
+                    location.href = $(this).attr('href');
+                    return false;
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="widget-container">
+        <h2 id="title"></h2>
+    </div>
+</body>
+</html>

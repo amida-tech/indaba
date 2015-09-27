@@ -1,0 +1,40 @@
+{
+	"members": [
+                {
+                    "userId": 1,
+                    "displayName": "Jeff Jiang",
+                    "roleName": "researcher",
+                    "roleId": 1,
+                    "firstName": "Jeff",
+                    "lastName": "Jiang",
+                    "userName": "jjiang"
+                },
+                {
+                    "userId": 2,
+                    "displayName": "Luke Shi",
+                    "roleName": "researcher",
+                    "roleId": 1,
+                    "firstName": "Luke",
+                    "lastName": "Shi",
+                    "userName": "lshi"
+                },
+                {
+                    "userId": 3,
+                    "displayName": "Larry Lu",
+                    "roleName": "admin",
+                    "roleId": 9,
+                    "firstName": "Larry",
+                    "lastName": "Lu",
+                    "userName": "llu"
+                },
+                {
+                    "userId": 4,
+                    "displayName": "Yan Cheng",
+                    "roleName": "researcher",
+                    "roleId": 1,
+                    "firstName": "Yan",
+                    "lastName": "Cheng",
+                    "userName": "ychen"
+                }
+            ]
+ }

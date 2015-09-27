@@ -1,0 +1,6 @@
+"KEY","ENGLISH"
+"cp.text.show_details","Show Details"
+"cp.text.hide_details","Hide Details"
+"cp.err.invalid_req_url","Invalid HTTP request: no controller or method can handle this request. Please check your url or contact your administrator!"
+"cp.err.invalid_proj_id","Invalid project ID!"
+"cp.err.invalid_surveyconf_id","Invalid survey config ID!"

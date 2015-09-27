@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="AggregationPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.ocs.indaba.aggregation.po.Datapoint</class>
+    <class>com.ocs.indaba.aggregation.po.WsProject</class>
+    <class>com.ocs.indaba.aggregation.po.ExpTarget</class>
+    <class>com.ocs.indaba.aggregation.po.WsPuser</class>
+    <class>com.ocs.indaba.aggregation.po.ScorecardAnswer</class>
+    <class>com.ocs.indaba.aggregation.po.ExportLog</class>
+    <class>com.ocs.indaba.aggregation.po.OtisValue</class>
+    <class>com.ocs.indaba.aggregation.po.Workset</class>
+    <class>com.ocs.indaba.aggregation.po.WsTarget</class>
+    <class>com.ocs.indaba.aggregation.po.AggrMethod</class>
+    <class>com.ocs.indaba.aggregation.po.ExpStudyPeriod</class>
+    <class>com.ocs.indaba.aggregation.po.DpMember</class>
+    <class>com.ocs.indaba.aggregation.po.TdsValue</class>
+    <class>com.ocs.indaba.aggregation.po.Dataset</class>
+    <class>com.ocs.indaba.aggregation.po.Scorecard</class>
+    <class>com.ocs.indaba.aggregation.po.WsIndicatorInstance</class>
+    <class>com.ocs.indaba.aggregation.po.Widget</class>
+    <class>com.ocs.indaba.aggregation.po.Config</class>
+    <class>com.ocs.indaba.aggregation.po.OtisValueA</class>
+    <class>com.ocs.indaba.aggregation.po.OtisValueB</class>
+    <class>com.ocs.indaba.aggregation.po.ScorecardA</class>
+    <class>com.ocs.indaba.aggregation.po.TdsValueB</class>
+    <class>com.ocs.indaba.aggregation.po.ScorecardB</class>
+    <class>com.ocs.indaba.aggregation.po.ScorecardAnswerB</class>
+    <class>com.ocs.indaba.aggregation.po.TdsValueA</class>
+    <class>com.ocs.indaba.aggregation.po.ScorecardAnswerA</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/indaba_publisher"/>
+      <property name="javax.persistence.jdbc.password" value="indaba_pwd"/>
+      <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+      <property name="javax.persistence.jdbc.user" value="indaba_user"/>
+    </properties>
+  </persistence-unit>
+</persistence>

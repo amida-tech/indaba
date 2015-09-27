@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.3//EN"
+"http://struts.apache.org/dtds/struts-config_1_3.dtd">
+
+<struts-config>
+    <form-beans>
+        <form-bean name="singleUpload" type="com.ocs.indaba.action.SingleUploadForm"/>
+        <form-bean name="multiUploads" type="com.ocs.indaba.action.MultiUploadForm"/>
+        <form-bean name="loginForm"
+                   type="com.openconceptsystems.indaba.vo.UserLoginVO"/>
+        <form-bean name="messageForm" type="com.ocs.indaba.vo.MessageForm"/>
+    </form-beans>
+    <global-forwards>
+        <forward name="login" path="/login.jsp"/>
+        <forward name="error" path="/error.jsp"/>
+        <forward name="yourcontent" path="/yourcontent.do"/>
+        <forward name="notebook" path="/notebook.do"/>
+        <forward name="assignMsg" path="/assignmentMessage.jsp" />
+        <forward name="journalEdit" path="/journalEdit.do"/>
+        <forward name="journalCreate" path="/journalCreate.do"/>
+        <forward name="journalDisplay" path="/journalDisplay.do"/>
+        <forward name="journalOverallReview" path="/journalOverallReview.do"/>
+    </global-forwards>
+
+    <action-mappings>
+        <!--<action path="/login" type="com.ocs.indaba.action.LoginAction"
+         name="login" scope="request">
+            <forward name="success" path="/index.jsp"/>
+            <forward name="failure" path="/login.jsp"/>
+        </action>-->
+        <action path="/login" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="login" scope="request">
+            <forward name="success" path="/yourcontent.do"/>
+            <forward name="failure" path="/login.jsp"/>
+        </action>
+
+        <action path="/logout" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="logout" scope="request">
+            <forward name="success" path="/login.jsp"/>
+        </action>
+
+        <action path="/yourcontent" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="yourcontent" scope="request">
+            <forward name="yourcontent" path="/yourContent.jsp"/>
+        </action>
+
+        <action path="/allcontent" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="allcontent" scope="request">
+            <forward name="allcontent" path="/allContent.jsp"/>
+        </action>
+
+        <action path="/cases" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="cases" scope="request">
+            <forward name="cases" path="/cases.jsp"/>
+        </action>
+
+        <action path="/queues" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="queues" scope="request">
+            <forward name="queues" path="/queues.jsp"/>
+        </action>
+        <action path="/queuesv2" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="queues" scope="request">
+            <forward name="queues" path="/queuesv2.jsp"/>
+        </action>
+
+        <action path="/queuesubmit" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+        </action>
+
+        <action path="/newcase" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="newcase" scope="request">
+            <forward name="newcase" path="/casePage.jsp"/>
+        </action>
+
+        <action path="/people" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="people" scope="request">
+            <forward name="people" path="/people.jsp"/>
+        </action>
+
+        <action path="/casedetail" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="casedetail" scope="request">
+            <forward name="casedetail" path="/casePage.jsp"/>
+            <forward name="casedetailfailed" path="/cases.do"/>
+        </action>
+
+        <action path="/createCase" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="createCase" scope="request">
+            <forward name="createCaseSuccess" path="/cases.do"/>
+        </action>
+
+
+        <action path="/updateCase" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="updateCase" scope="request">
+            <forward name="updateCaseSuccess" path="/cases.do"/>
+        </action>
+
+        <action path="/addCaseNote" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="addCaseNote" scope="request">
+            <forward name="addCaseNoteSuccess" path="/casedetail.do"/>
+        </action>
+
+        <action path="/profile" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="profile" scope="request">
+            <forward name="profile" path="/peopleProfile.jsp"/>
+        </action>
+
+        <action path="/changeinfo" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="changeinfo" scope="request">
+            <forward name="profile" path="/peopleProfile.jsp"/>
+        </action>
+
+        <action path="/changepwd" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="changepwd" scope="request">
+            <forward name="profile" path="/peopleProfile.jsp"/>
+        </action>
+
+        <action path="/forgetpwd" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="forgetpwd" scope="request">
+        </action>
+
+        <action path="/setSpans" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="setSpans" scope="request">
+        </action>
+
+        <action path="/changeimg" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="singleUpload" scope="request">
+            <forward name="profile" path="/peopleProfile.jsp"/>
+        </action>
+
+        <action path="/messages" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="messageForm" scope="request">
+            <forward name="messages" path="/messages.jsp"/>
+        </action>
+
+        <action path="/messagedetail" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="messageForm" scope="request">
+            <forward name="messageDetail" path="/messageDetail.jsp"/>
+        </action>
+
+        <action path="/notebook" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="singleUpload" scope="request">
+            <!--forward name="notebook" path="/notebook.jsp"/-->
+            <forward name="notebook" path="/notebook.do"/>
+            <forward name="edit" path="/notebookEdit.jsp"/>
+            <forward name="display" path="/notebookDisplay.jsp"/>
+            <forward name="submit" path="/notebookDisplay.jsp"/>
+        </action>
+
+        <action path="/journalCreate" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="journalCreate" scope="request">
+            <!--
+            <forward name="nb_disp" path="/notebookDisplay.jsp"/>
+            <forward name="nb_edit" path="/notebookEdit.jsp"/>
+            <forward name="nb_general" path="/notebookGeneral.jsp"/>
+            <forward name="nb_view" path="/notebookView.jsp"/>
+            <forward name="sb_disp" path="/scoreboardDisplay.jsp"/>
+            <forward name="sb_navi" path="/scoreboardNavigation.jsp"/>
+            -->
+        </action>
+        <action path="/journalEdit" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="journalEdit" scope="request">
+        </action>
+
+        <action path="/newmsg" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="messageForm" scope="request">
+            <forward name="newmessage" path="/newMessage.jsp" />
+        </action>
+
+        <action path="/replymsg" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="messageForm" scope="request">
+            <forward name="replymessage" path="/replyMessage.jsp" />
+        </action>
+
+        <action path="/createmsg" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="messageForm" scope="request">
+            <forward name="success" path="/messages.do" redirect="true"/>
+        </action>
+
+        <action path="/userlist" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/popups/userList.jsp" />
+        </action>
+
+        <action path="/rolelist" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/popups/roleList.jsp" />
+        </action>
+
+        <action path="/teamlist" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/popups/teamList.jsp" />
+        </action>
+
+        <action path="/attachment"  type="org.springframework.web.struts.DelegatingActionProxy"
+                name="singleUpload" scope="request">
+        </action>
+
+        <!-- <action path="/discussionBoardAjax" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action> -->
+
+        <action path="/discussionBoard" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/discussionBoard.jsp" />
+        </action>
+
+        <action path="/enhance" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/review" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/journalReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="upload" scope="request">
+            <forward name="display" path="/journalReview.jsp"/>
+            <forward name="edit" path="/notebookEdit.jsp"/>
+        </action>
+
+        <action path="/journalPeerReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="upload" scope="request">
+            <forward name="display" path="/journalPeerReview.jsp"/>
+        </action>
+
+        <action path="/journalPRReviews" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="upload" scope="request">
+            <forward name="display" path="/journalPRReviews.jsp"/>
+        </action>
+
+        <action path="/surveyAnswerReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/indicatorReviewPage.jsp"/>
+        </action>
+
+        <action path="/surveyAnswerPeerReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/indicatorPeerReviewPage.jsp"/>
+        </action>
+
+        <action path="/surveyAnswerPRReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/indicatorPRReviewPage.jsp"/>
+        </action>
+
+        <action path="/surveyAnswerPeerReviewDisplay" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswerPeerReviewDisplay.jsp"/>
+        </action>
+
+        <action path="/cntgeneral" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="cntgeneral" path="/contentGeneral.jsp" />
+        </action>
+
+        <action path="/contentApproval" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/yourcontent.do"/>
+            <forward name="contentApproval" path="/contentApproval.jsp" />
+        </action>
+        <action path="/contentPayment" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/yourcontent.do" />
+            <forward name="contentPayment" path="/contentPayment.jsp" />
+        </action>
+        <action path="/surveyAnswerDisplay" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswerDisplay.jsp"/>
+        </action>
+        <action path="/surveyAnswerOriginal" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswerOriginal.jsp"/>
+        </action>
+        <action path="/surveyAnswer" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswer.jsp"/>
+        </action>
+        <action path="/answerDetails" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/answerDetails.jsp"/>
+        </action>
+        <action path="/surveyDisplay" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/surveyPreVersionDisplay" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardPreVersionDisplay.jsp"/>
+        </action>
+        <action path="/indicatorSingleChoicePage" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="Targets" path="/indicatorSingleChoicePage.jsp"/>
+        </action>
+        <action path="/surveyEdit" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/surveyCreate" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/surveyReviewResponse" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/surveyReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/srQstnRespond" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/surveyPeerReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/surveyPRReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardDisplay.jsp"/>
+        </action>
+        <action path="/tag" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="indicatorSingleChoicePage" path="/indicatorSingleChoicePage.jsp" />
+        </action>
+        <action path="/workflowConsole" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/workflowConsole.jsp"/>
+        </action>
+        <action path="/runWorkflow" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/workflowConsole.jsp"/>
+        </action>
+        <action path="/ruleManager" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/ruleManager.jsp"/>
+        </action>
+        <action path="/surveyAnswerSubmit" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/scorecardIndicatorSearch" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/scorecardNavigation" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardNavigation.jsp"/>
+        </action>
+
+        <action path="/scorecardIndicatorSearchContent" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/peopleFilter" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/switchToProject" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/casesFilter" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/caseMsgBoard" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/updateTaskAssignmentStatus" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/surveySubmit" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/fileupload" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/iHaveQuestions" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/assignment" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/journalReviewResponse" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="upload" scope="request">
+            <forward name="display" path="/notebookEdit.jsp"/>
+        </action>
+
+        <action path="/surveyProblemList" type="org.springframework.web.struts.DelegatingActionProxy"
+                name="upload" scope="request">
+            <forward name="success" path="/surveyAnswerQuestionSidebar.jsp"/>
+            <forward name="questionlist" path="/surveyReviewQuestions.jsp"/>
+        </action>
+
+        <action path="/downloadFile" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/indicatorAddTag" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/updateSurveyAnswerFlag" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+
+        <action path="/horseApproval" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/yourcontent.do"/>
+            <forward name="horseApproval" path="/horseApproval.jsp" />
+        </action>
+
+        <action path="/journalOverallReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="display" path="/journalOverallReview.jsp"/>
+        </action>
+
+        <action path="/surveyOverallReview" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyOverallReview.jsp"/>
+        </action>
+        <action path="/journalContentVersion" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/journalContentVersion.jsp"/>
+        </action>
+        <action path="/userfinder" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="userfinder" path="/userfinder.jsp"/>
+        </action>
+        <action path="/fireuserfinder" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="fireuserfinder" path="/userfinder.jsp"/>
+        </action>
+
+        <action path="/submitIndicator" type="org.springframework.web.struts.DelegatingActionProxy" />
+        <action path="/submitSurvey" type="org.springframework.web.struts.DelegatingActionProxy" />
+        <action path="/submitJournal" type="org.springframework.web.struts.DelegatingActionProxy" />
+        <action path="/loadHistoryChart" type="org.springframework.web.struts.DelegatingActionProxy" />
+        <action path="/scorecardPeerReviewDisagreement" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/scorecardPeerReviewDisagreementList.jsp"/>
+        </action>
+        <action path="/help" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/help.jsp"/>
+        </action>
+        <action path="/tasklist" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/taskList.jsp"/>
+        </action>
+        <action path="/sourceFile" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/textResource" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/textResourceTemplate" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/notificationEdit" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/jsI18nMsg" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/i18nTools" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/i18nTools.jsp"/>
+        </action>
+        <action path="/mailbatch" type="org.springframework.web.struts.DelegatingActionProxy" scope="request">
+        </action>
+        
+        <action path="/preactivate" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/peopleActivation.jsp"/>
+            <forward name="failure" path="/login.jsp"/>
+        </action>
+        <action path="/activate" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/profile.do"/>
+            <forward name="failure" path="/login.jsp"/>
+        </action>
+        <action path="/td" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/commPanel" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/flagResponse" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswerFlagResponse.jsp"/>
+        </action>
+        <action path="/surveyFlagResponse" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/flagUnset" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+            <forward name="success" path="/surveyAnswerFlagUnset.jsp"/>
+        </action>
+        <action path="/surveyFlagUnset" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/taskSummary" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+        <action path="/checkFlagAssignments" type="org.springframework.web.struts.DelegatingActionProxy"
+                scope="request">
+        </action>
+    </action-mappings>
+
+    <controller processorClass="org.springframework.web.struts.DelegatingRequestProcessor" >
+        <set-property property="maxFileSize" value="40M" />
+        <set-property property="memFileSize" value="40M" />
+        <set-property property="tempDir" value="/tmp" />
+    </controller>
+    <message-resources parameter="ApplicationResources"/>
+
+    <plug-in className="org.springframework.web.struts.ContextLoaderPlugIn">
+        <set-property property="contextConfigLocation" value="/WEB-INF/spring/applicationContext.xml" />
+    </plug-in>
+    <!--
+    <plug-in className="org.apache.struts.tiles.TilesPlugin" >
+        <set-property property="definitions-config" value="/WEB-INF/tiles-def.xml" />
+        <set-property property="definitions-parser-validate" value="true" />
+    </plug-in> -->
+</struts-config>
+

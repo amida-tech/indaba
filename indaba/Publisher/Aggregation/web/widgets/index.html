@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+	<title>widgets dashboard</title>
+	<link rel="stylesheet" href="css/common.css" />
+	<style type="text/css">
+		body{
+			text-align:center;
+		}
+		#iframe{
+			margin:0 auto;
+		}
+		ul li{
+			float:left;
+			list-style:none;
+			padding:5px 10px 5px 0;
+		}
+	</style>
+	<script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+	<script type="text/javascript">
+		var url = 'http://localhost:8080/aggregation/journal.do?horseId=1&includeReviews=1';
+		$.getJSON(url, function(json){
+			alert(json);
+		});
+		
+		$(document).bind('contentWindowLoaded', function(event, height){
+			autoAdjustFrame(height);
+		});
+		
+		function autoAdjustFrame(height){
+			var frm = document.getElementById('iframe');
+			var h1 = frm.contentWindow.document.body.scrollHeight;
+			var h2 = frm.contentWindow.document.documentElement.scrollHeight;
+			frm.height = height + 38; //Math.max(h1, h2);
+			
+			/*
+			try {
+				var frame = document.getElementById('iframe');
+				var innerDoc = (frame.contentDocument) ? frame.contentDocument : frame.contentWindow.document;
+				var objToResize = (frame.style) ? frame.style : frame;
+				objToResize.height = innerDoc.body.scrollHeight + 16 + 'px';
+			}
+			catch (err) {
+				alert(err.message);
+				window.status = err.message;
+			}
+			*/
+		}
+		
+		function loadShortJournal(){
+			$('#iframe').attr('src', 'journalDisplay.html')
+					  .css('width', '50%');
+			return false;
+		}
+		
+		function loadLongJournalWithPR(){
+			$('#iframe').attr('src', 'journalDisplay.html')
+					  .css('width', '800px');
+			return false;
+		}
+		
+		function loadLongJournalWithoutPR(){
+			$('#iframe').attr('src', 'journalDisplay.html')
+					  .css('width', '800px');
+			return false;
+		}
+		
+		function loadVCard(){
+			$('#iframe').attr('src', 'vcardDisplay.html')
+					  .css('width', '800px');
+			return false;
+		}
+		
+		function loadHCard(){
+			$('#iframe').attr('src', 'hcardDisplay.html')
+					  .css('width', '800px');
+			return false;
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li><a href="#" onclick="loadShortJournal()">Short Journal Display - Half Width</a></li>
+		<li><a href="#" onclick="loadLongJournalWithPR()">Long Journal with Peer Reviews - Full Width</a></li>
+		<li><a href="#" onclick="loadLongJournalWithoutPR()">Long Journal without Peer Reviews - Full Width</a></li>
+		<li><a href="#" onclick="loadVCard()">Vertical Scorecard Widget – Full Width</a></li>
+		<li><a href="#" onclick="loadHCard()">Horizontal Scorecard Widget – Full Width</a></li>
+		<li><a href="#" onclick="loadDataSummary()">Data Summary Widget – Half Width</a></li>
+		<li><a href="#" onclick="loadIndicatorSummary()">Indicator Summary Widget – Half Width</a></li>
+		<li><a href="#" onclick="loadSparkline()">Sparkline</a></li>
+	</ul>
+	<div style="clear:both"></div>
+	<hr style="border:0;border-top:1px solid gray;height:1px;"/>
+	<iframe id="iframe" src="" frameborder="0" scrolling="no"></iframe>
+</body>
+</html>

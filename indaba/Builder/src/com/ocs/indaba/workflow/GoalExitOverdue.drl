@@ -1,0 +1,20 @@
+package com.ocs.indaba.workflow
+
+import java.util.Date;
+import com.ocs.indaba.util.DateUtils;
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.Goal;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Goal exit overdue"
+    when
+        goal: Goal()
+        goalObject: GoalObject()
+        siteMessageService: SiteMessageService()
+        eval((new Date()).getTime()-goalObject.getEnterTime().getTime() >= (goal.getDuration()+30)*(long)DateUtils.MILLISECONDS_OF_DAY)
+    then
+    	System.out.println("=====<<<< GOAL EXIT OVERDUE >>>>======");
+        goalObject.setStatus((short)Constants.GOAL_OBJECT_STATUS_DONE);
+        siteMessageService.notifyProjectAdminGoalExit(goalObject, 100);
+end

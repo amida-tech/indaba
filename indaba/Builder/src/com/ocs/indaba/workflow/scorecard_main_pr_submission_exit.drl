@@ -1,0 +1,58 @@
+package com.ocs.indaba.workflow
+
+import java.util.Date;
+import com.ocs.indaba.util.DateUtils;
+import com.ocs.indaba.common.Constants;
+import com.ocs.indaba.po.Goal;
+import com.ocs.indaba.po.GoalObject;
+import com.ocs.indaba.dao.GoalObjectDAO;
+import com.ocs.indaba.service.HorseService;
+import com.ocs.indaba.po.TaskAssignment;
+import com.ocs.indaba.service.SiteMessageService;
+
+rule "Goal exit partial completion"
+    when
+        goal: Goal()
+        goalObject: GoalObject()
+        goalObjectDAO: GoalObjectDAO()
+        horseService: HorseService()
+        taIndex: Integer()
+
+        eval(taIndex == 1)
+        eval((new Date()).getTime()-goalObject.getEnterTime().getTime() >= (goal.getDuration()+7)*(long)DateUtils.MILLISECONDS_OF_DAY)
+        eval(horseService.getGoalObjectCompletedPercentage(goalObject) >= 0.75)
+    then
+        // System.out.println("=====<<<< GOAL EXIT PARTIAL COMPLETION >>>>======");
+        goalObject.setStatus((short)Constants.GOAL_OBJECT_STATUS_DONE);
+        goalObject.setExitTime(new Date());
+        goalObjectDAO.update(goalObject);
+end
+
+rule "Goal exit partial completion 2"
+    when
+        goal: Goal()
+        goalObject: GoalObject()
+        goalObjectDAO: GoalObjectDAO()
+        horseService: HorseService()
+        taIndex: Integer()
+
+        eval(taIndex == 1)
+        eval((new Date()).getTime()-goalObject.getEnterTime().getTime() >= (goal.getDuration()+21)*(long)DateUtils.MILLISECONDS_OF_DAY)
+        eval(horseService.getGoalObjectCompletedCount(goalObject) >= 3)
+    then
+        // System.out.println("=====<<<< GOAL EXIT PARTIAL COMPLETION >>>>======");
+        goalObject.setStatus((short)Constants.GOAL_OBJECT_STATUS_DONE);
+        goalObject.setExitTime(new Date());
+        goalObjectDAO.update(goalObject);
+end
+
+
+rule "Confirm Task Completion"
+    when
+        ta: TaskAssignment()
+	siteMessageService: SiteMessageService()
+        eval(ta.getStatus() == Constants.TASK_STATUS_DONE)
+    then
+    	// System.out.println("=====<<<< CONFIRM TASK COMPLETION >>>>======");
+        siteMessageService.sendTaskMessage(ta, Constants.NOTIFICATION_TYPE_CONFIRM_TASK_COMPLETED);
+end

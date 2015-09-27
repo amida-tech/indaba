@@ -1,0 +1,150 @@
+table.discussion tr{
+	border-width: 0;
+	border-bottom:1px solid #ddf;
+}
+table.discussion td{
+    vertical-align:top;
+}
+tr.even{
+}
+th span.asc {
+	background-image: url(../images/icon_asc.gif);
+	position:absolute;
+	right:5px;
+	top:0;
+        width:16px;
+}
+th span.desc {
+	background-image: url(../images/icon_desc.gif);
+	position:absolute;
+	right:5px;
+	top:0;
+        width:16px;
+}
+th .select{
+	position:absolute;
+	right: 24px;
+	top:-1px;
+}
+.thDiv{
+	position:relative;
+}
+.viewDetail{
+	background:transparent url(../images/icon_add.gif) no-repeat center 2px;
+	border:1px solid transparent;
+	height:24px;
+	line-height:20px;
+	position:absolute;
+	right:8px;
+	top:1px;
+	cursor:pointer;
+	text-align:center;
+	width: 28px;
+	z-index:999;
+}
+.viewDetailExpanded{
+	background-color:#fff;
+	background-image:url(../images/icon_minus.gif);
+	border-color:#ee9;
+	border-bottom:0;
+	height:24px;
+}
+.detailBody{
+	background-color:#fff;
+	border:1px solid #ee9;
+	display:none;
+	line-height:1.5em;
+	position:absolute;
+	top:25px;
+	right:8px;
+}
+.originalText, .enhance{
+	padding:5px 8px;
+}
+.originalText pre{
+    max-height: 300px;
+    overflow: auto;
+}
+.enhance h4{
+	background:url(../images/icon_arrow_right.gif) no-repeat 105px center;
+        cursor:pointer;
+}
+.enhance h4.expanded{
+	background-image:url(../images/icon_desc.gif);
+}
+.enhanceTitle {
+	height:auto;
+	width:98%;	
+}
+.enhance textarea  {
+	height:auto;
+	margin:6px 0 .5em;
+	width:98%;
+}
+.newTopic textarea{
+    border: 1px solid #999;
+    height: 160px;
+    margin: 6px 0 6px 48px;
+    width: 90%;
+}
+.enhance div{
+	display:none;
+}
+.btn-add{
+    background: #C2E1EF url(../images/add.png) no-repeat 5px center;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px 5px 5px 20px;
+}
+td.newTopic{
+    position: relative;
+}
+.newTopicAdding{
+    background-color:#C2E1EF;
+    display: none;
+    font-size: 1.2em;
+    margin-left: .5em;
+    padding: 6px 50px 6px 8px;
+}
+.viewAllDetails{
+    background: url(../images/icon_m_add.gif) no-repeat center center;
+    cursor:pointer;
+    position: absolute;
+    top: -2px;
+    right: 24px;
+    width: 18px;
+    height: 20px;
+}
+.viewAllDetailsExpanded{
+    background-image: url(../images/icon_m_minus.gif);
+}
+
+
+.message .item{
+    border-bottom: 1px solid #eee;
+    padding: 10px 0 10px 80px;
+    position: relative;
+}
+.message .last-item{
+    border-bottom:0;
+}
+.message .item .prompt{
+    color: red;
+    display: none;
+    font-style: italic;
+}
+.message .item label {
+    color: #666;
+    display: inline;
+    font-weight: bold;
+    left: 0;
+    position: absolute;
+    text-align: left;
+}
+.message .item,
+.message .item label,
+.message .item a,
+.message .item input,
+.message .item textarea{
+    font-size: 14px;
+}

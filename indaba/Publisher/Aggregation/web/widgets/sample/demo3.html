@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+ <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <title>Multiples Widgets</title>
+        <style>
+            iframe {
+                float:left;
+                margin-right:1em;
+            }
+        </style>
+        <script type="text/javascript" src="../indaba_widget.js"></script>
+        <script type="text/javascript">
+            function onLoad()
+            {
+                var ss = location.href.split('/');
+                ss = ss.slice(0, -2);
+                var widget = 'vcardDisplay.html?horseId=1&version=1';
+                ss.push(widget)
+                var src = ss.join('/');
+
+                ss = ss.slice(0, -1);
+                ss.push('indaba_widget_helper.html');
+                var helper = ss.join('/');
+
+                document.getElementById('frame1').src = src + '&frameId=frame1&helper=' + encodeURIComponent(helper);
+
+                ss = ss.slice(0, -1);
+                ss.push('vcardDisplay.html?horseId=5&version=1');
+                src = ss.join('/');
+
+                document.getElementById('frame2').src = src + '&frameId=frame2&helper=' + encodeURIComponent(helper);
+
+                ss = ss.slice(0, -1);
+                ss.push('hcardDisplay.html?productId=1&version=1');
+                src = ss.join('/');
+
+                document.getElementById('frame4').src = src + '&frameId=frame4&helper=' + encodeURIComponent(helper);
+            }
+        </script>
+    </head>
+    <body onload="onLoad()">
+        <iframe id="frame1" frameborder="0" width="600" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame2" frameborder="0" width="600" scrolling="no"
+                src=""></iframe>
+        <iframe id="frame3" frameborder="0" scrolling="no"
+                src="../../dataSummary.jsp?horseId=1&version=1" width="380" height="637"></iframe>
+        <iframe id="frame4" frameborder="0" width="800" scrolling="no"
+                src=""></iframe>
+    </body>
+</html>

@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title>Vertical Scorecard Display</title>
+    <link rel="stylesheet" href="css/tipTip.css" />
+    <link rel="stylesheet" href="css/common.css" />
+    <script type="text/javascript" src="js/jquery-1.5.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery.tipTip.js"></script>
+    <script type="text/javascript" src="js/widget.common.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $(document.body).append('<div class="loading"></div>');
+            
+            var horseId = $WIDGET.getUrlParameter('horseId');
+            var subcatId = $WIDGET.getUrlParameter('subcatId');
+            var exportPdf = $WIDGET.getUrlParameter('exportPdf');
+
+            $WIDGET.deleteParameter('subcatId');
+            $('#back-link').attr('href', 'vcardDisplay.html?'+$WIDGET.getParamUrlComponent());
+
+            var url = '../vcardSubcat.do?horseId='+horseId+'&subcatId='+subcatId;
+            $.getJSON(url, function(json){
+                $('#scorecard-title').text(json.title);
+                $('#subcat-name').text(json.data.title);
+
+                if(exportPdf != null){
+                    $('#scorecard-title').remove();
+                }
+
+                var html = '';
+                var qsets = $('#question-sets');
+                for (var i=0; i<json.data.questionSets.length; i++){
+                    var q = json.data.questionSets[i];
+                    var tag = i % 2 == 1 ? '<tr class="even">' : '<tr>';
+                    html += tag+'<td>'+q.label+'</td><td><a href="#questionset'+q.id+'">'+q.name+'</a></td>';
+                    html += '<td nowrap>'+$WIDGET.getStrongnessHtml(q.scoreValue, q.scoreLabel, true, q.useScore)+'</td></tr>';
+
+                    // question-set-id
+                    var spanIt = "&nbsp;&nbsp;&nbsp;&nbsp;";
+                    if(exportPdf != null){
+                    	spanIt = ' <span style="width:16px; display:inline-block; "></span>';
+                    	//spanIt = ' ';
+                    }
+                    qsets.append('<div id="question-set-'+q.id+'" class="question-set"><a name="questionset'+q.id+'"/><h4>'+q.label+spanIt+q.name+'</h4></div>');
+                }
+                $('tbody', '#question-set-table').append(html);
+
+                // fill in questions
+                var count = 0;
+                for (var i=0; i<json.data.questionSets.length; i++){
+                    var qs = json.data.questionSets[i];
+                    (function(questionSetId){
+                        $.getJSON('../vcardQuestionSet.do?horseId='+horseId+'&questionSetId='+questionSetId, function(data){
+                            for (var j=0; j<data.data.questions.length; j++){
+                                var q = data.data.questions[j];
+                                var html = '<div class="question-item">';
+                                html += '<h5>'+q.publicName+': '+q.questionText+'</h5>';
+
+                                // score
+                                html += '<div class="score"><em class="category">Score:</em> ';
+                                html += '<span class="options">';
+                                for (var k=0; k<q.options.length; k++){
+                                    var tag = q.options[k].selected ? '<span class="selected">' : '<span>';
+                                    html += tag+q.options[k].label+'</span>';
+                                }
+                                html += '</span>';
+
+                                // score criteria tip
+                                html += '<span class="q-mark">';
+                                html += '</span>';
+                                html += '</div>';
+
+                                // comments, references and reviews
+                                if (q.comments && $.trim(q.comments).length>0)
+                                    html += '<div class="question-item-p"><em class="category">Comments: </em><pre>'+q.comments+'</pre></div>';
+                                if (q.references && $.trim(q.references).length>0)
+                                    html += '<div class="question-item-p"><em class="category">References: </em><pre>'+q.references+'</pre></div>';
+                                if (q.reviews){
+                                    for (var k=0; k<q.reviews.length; k++){
+                                        if ($.trim(q.reviews[k]).length > 0)
+                                            html += '<div class="question-item-p"><em class="category">Peer Review Comments: </em><pre>'+q.reviews[k]+'</pre></div>';
+                                    }
+                                }
+                                html += '</div>';
+                                
+                                $('#question-set-'+questionSetId).append(html);
+                                $WIDGET.widgetResizePipe('VCARD_DISPLAY_INDICATOR');
+                                
+                                // tipTip
+                                var tip = '<h5>Scoring Criteria</h5>';
+                                var cs = [];
+                                for (var k=0; k<q.options.length; k++){
+                                    cs.push('<p><strong><em class="category">'+q.options[k].label+':</em></strong> '+q.options[k].criteria+'</p>');
+                                }
+                                tip += cs.join('<hr/>');
+                                $('span.q-mark:eq('+j+')', '#question-set-'+questionSetId).tipTip({
+                                    defaultPosition:'bottom',
+                                    maxWidth:'300px',
+                                    content:tip
+                                });
+                            }
+                        });
+                    })(qs.id);
+                }
+
+                //export pdf
+                if(exportPdf == null){
+                    var downloadPdf = '<div style="text-align:right;padding:0px 30px;"><a href="../exportPdfForScorecard.do?onlyExportSubcat=true&horseId='+horseId+'&subcatIds='+subcatId+'">Download PDF</a></div>';
+                    $('.widget-container').append(downloadPdf);
+                }
+ 
+                $('.loading').remove();
+                $WIDGET.widgetResizePipe('VCARD_DISPLAY_INDICATOR');
+            });
+        });
+    </script>
+</head>
+<body>
+    <div class="widget-container">
+        <h2 id="scorecard-title"></h2>
+        <h3 id="subcat-name"></h3>
+        <a id="back-link" href="vcardDisplay.html">Back</a>
+        <table id="question-set-table" width="100%">
+            <thead>
+                <tr class="category even">
+                    <th>Indicator</th>
+                    <th></th>
+                    <th>Score</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        <div id="question-sets">
+            
+        </div>
+    </div>
+</body>
+</html>

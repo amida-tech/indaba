@@ -1,0 +1,423 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">-->
+<beans
+    xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:tx="http://www.springframework.org/schema/tx"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+    http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd">
+
+    <!-- enable annotation-based configuration such as autowiring -->
+    <context:annotation-config/>
+    <context:component-scan base-package="com.ocs" />
+    <bean id="dataSource"
+          class="com.mchange.v2.c3p0.ComboPooledDataSource"
+          destroy-method="close">
+
+        <property name="driverClass">
+            <value>com.mysql.jdbc.Driver</value>
+        </property>
+        <property name="jdbcUrl">
+            <value>jdbc:mysql://127.0.0.1:#{systemProperties['port']!=null ? systemProperties['port']:3306}/indaba?autoReconnect=true&amp;zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8&amp;useDynamicCharsetInfo=false</value>
+        </property>
+        <property name="user">
+            <value>indaba_user</value>
+        </property>
+        <property name="password">
+            <value>indaba_pwd</value>
+        </property>
+        <property name="initialPoolSize">
+            <value>10</value>
+        </property>
+        <property name="minPoolSize">
+            <value>10</value>
+        </property>
+        <property name="maxPoolSize">
+            <value>30</value>
+        </property>
+        <property name="maxIdleTime">
+            <value>60</value>
+        </property>
+        <property name="acquireIncrement">
+            <value>5</value>
+        </property>
+        <property name="idleConnectionTestPeriod">
+            <value>60</value>
+        </property>
+        <property name="acquireRetryAttempts">
+            <value>30</value>
+        </property>
+    </bean>
+
+    <!-- indaba DAO conf -->
+    <bean id="caseDao" class="com.ocs.indaba.dao.CaseDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectDao" class="com.ocs.indaba.dao.ProjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="productDao" class="com.ocs.indaba.dao.ProductDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectAdminDao" class="com.ocs.indaba.dao.ProjectAdminDAO" >
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectTargetDao" class="com.ocs.indaba.dao.ProjectTargetDAO" >
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectOwnerDao" class="com.ocs.indaba.dao.ProjectOwnerDAO" >
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectRoleDao" class="com.ocs.indaba.dao.ProjectRoleDAO" >
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectMembershipDao" class="com.ocs.indaba.dao.ProjectMembershipDAO" >
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="teamDao" class="com.ocs.indaba.dao.TeamDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="sequenceObjectDAO" class="com.ocs.indaba.dao.SequenceObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="teamUserDao" class="com.ocs.indaba.dao.TeamUserDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="roleDao" class="com.ocs.indaba.dao.RoleDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="taskDao" class="com.ocs.indaba.dao.TaskDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="taskRoleDao" class="com.ocs.indaba.dao.TaskRoleDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="taskAssignmentDao" class="com.ocs.indaba.dao.TaskAssignmentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="userDao" class="com.ocs.indaba.dao.UserDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="horseDao" class="com.ocs.indaba.dao.HorseDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="pregoalDao" class="com.ocs.indaba.dao.PregoalDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="viewPermissionDao" class="com.ocs.indaba.dao.ViewPermissionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="viewMatrixDao" class="com.ocs.indaba.dao.ViewMatrixDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="contentHeaderDao" class="com.ocs.indaba.dao.ContentHeaderDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="journalPeerReviewDao" class="com.ocs.indaba.dao.JournalPeerReviewDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="journalContentVersionDao" class="com.ocs.indaba.dao.JournalContentVersionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="journalAttachmentVersionDao" class="com.ocs.indaba.dao.JournalAttachmentVersionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="contentVersionDao" class="com.ocs.indaba.dao.ContentVersionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="targetDao" class="com.ocs.indaba.dao.TargetDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="orgDao" class="com.ocs.indaba.dao.OrganizationDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="orgadminDao" class="com.ocs.indaba.dao.OrgadminDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="orgkeyDao" class="com.ocs.indaba.dao.OrgkeyDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="ttagsDao" class="com.ocs.indaba.dao.TtagsDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="targetTagDao" class="com.ocs.indaba.dao.TargetTagDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="accessMatrixDao" class="com.ocs.indaba.dao.AccessMatrixDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="studyPeriodDao" class="com.ocs.indaba.dao.StudyPeriodDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="uploadFileDao" class="com.ocs.indaba.dao.UploadFileDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="journalDao" class="com.ocs.indaba.dao.JournalConfigDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyDao" class="com.ocs.indaba.dao.SurveyConfigDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="journalContentObjectDao" class="com.ocs.indaba.dao.JournalContentObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="workflowDao" class="com.ocs.indaba.dao.WorkflowDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="langDao" class="com.ocs.indaba.dao.LanguageDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="itagsDao" class="com.ocs.indaba.dao.ItagsDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="referenceDao" class="com.ocs.indaba.dao.ReferenceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="referenceChoiceDao" class="com.ocs.indaba.dao.ReferenceChoiceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="referenceObjectDao" class="com.ocs.indaba.dao.ReferenceObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="mailbatchDao" class="com.ocs.indaba.dao.MailbatchDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="notificationItemDao" class="com.ocs.indaba.dao.NotificationItemDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyIndicatorDao" class="com.ocs.indaba.dao.SurveyIndicatorDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyIndicatorIntlDao" class="com.ocs.indaba.dao.SurveyIndicatorIntlDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="atcChoiceDao" class="com.ocs.indaba.dao.AtcChoiceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="atcChoiceIntlDao" class="com.ocs.indaba.dao.AtcChoiceIntlDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeDao" class="com.ocs.indaba.dao.AnswerTypeDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeIntegerDao" class="com.ocs.indaba.dao.AnswerTypeIntegerDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeFloatDao" class="com.ocs.indaba.dao.AnswerTypeFloatDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeTextDao" class="com.ocs.indaba.dao.AnswerTypeTextDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeChoiceDao" class="com.ocs.indaba.dao.AnswerTypeChoiceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="indicatorTagDao" class="com.ocs.indaba.dao.IndicatorTagDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="sourceFileDao" class="com.ocs.indaba.dao.SourceFileDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="sourceFileTextResourceDao" class="com.ocs.indaba.dao.SourceFileTextResourceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="textItemDao" class="com.ocs.indaba.dao.TextItemDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="textResourceDao" class="com.ocs.indaba.dao.TextResourceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="goalDao" class="com.ocs.indaba.dao.GoalDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="goalObjectDao" class="com.ocs.indaba.dao.GoalObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="attachmentDao" class="com.ocs.indaba.dao.AttachmentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="toolDao" class="com.ocs.indaba.dao.ToolDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="accessPermissionDao" class="com.ocs.indaba.dao.AccessPermissionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="eventDao" class="com.ocs.indaba.dao.EventDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="eventLogDao" class="com.ocs.indaba.dao.EventLogDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="workflowObjectDao" class="com.ocs.indaba.dao.WorkflowObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="scContributorDao" class="com.ocs.indaba.dao.ScContributorDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="tasksubDao" class="com.ocs.indaba.dao.TasksubDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyQuestionDao" class="com.ocs.indaba.dao.SurveyQuestionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyAnswerDao" class="com.ocs.indaba.dao.SurveyAnswerDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyAnswerVersionDao" class="com.ocs.indaba.dao.SurveyAnswerVersionDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyCategoryDao" class="com.ocs.indaba.dao.SurveyCategoryDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyPeerReviewDao" class="com.ocs.indaba.dao.SurveyPeerReviewDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyContentDao" class="com.ocs.indaba.dao.SurveyContentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerObjectDao" class="com.ocs.indaba.dao.AnswerObjectDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerObjectChoiceDao" class="com.ocs.indaba.dao.AnswerObjectChoiceDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerObjectFloaDao" class="com.ocs.indaba.dao.AnswerObjectFloatDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerObjectIntegerDao" class="com.ocs.indaba.dao.AnswerObjectIntegerDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerObjectTextDao" class="com.ocs.indaba.dao.AnswerObjectTextDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="msssageDao" class="com.ocs.indaba.dao.MessageDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="messageboardDao" class="com.ocs.indaba.dao.MessageboardDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="assignmentDao" class="com.ocs.indaba.dao.AssignmentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="userFinderDao" class="com.ocs.indaba.dao.UserFinderDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="userFinderEventDao" class="com.ocs.indaba.dao.UserFinderEventDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="scIndicatorDao" class="com.ocs.indaba.dao.ScIndicatorDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="configDao" class="com.ocs.indaba.dao.ConfigDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectNotifDao" class="com.ocs.indaba.dao.ProjectNotifDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="projectNotifRoleDao" class="com.ocs.indaba.dao.ProjectNotifRoleDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="notificationTypeDao" class="com.ocs.indaba.dao.NotificationTypeDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="answerTypeTableDao" class="com.ocs.indaba.dao.AnswerTypeTableDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="sprComponentDao" class="com.ocs.indaba.dao.SprComponentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="surveyAnswerComponentDao" class="com.ocs.indaba.dao.SurveyAnswerComponentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="tokensetDao" class="com.ocs.indaba.dao.TokensetDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>  
+    <bean id="notedefDao" class="com.ocs.indaba.dao.NotedefDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="notedefRoleDao" class="com.ocs.indaba.dao.NotedefRoleDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="notedefUserDao" class="com.ocs.indaba.dao.NotedefUserDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="noteobjDao" class="com.ocs.indaba.dao.NoteobjDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="noteobjIntlDao" class="com.ocs.indaba.dao.NoteobjIntlDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupdefDao" class="com.ocs.indaba.dao.GroupdefDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupdefUserDao" class="com.ocs.indaba.dao.GroupdefUserDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupdefRoleDao" class="com.ocs.indaba.dao.GroupdefRoleDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupobjCommentDao" class="com.ocs.indaba.dao.GroupobjCommentDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupobjFlagDao" class="com.ocs.indaba.dao.GroupobjFlagDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <bean id="groupobjDao" class="com.ocs.indaba.dao.GroupobjDAO">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    
+    
+    <!--
+    <bean id="workflowEngine" class="com.ocs.indaba.workflow.WorkflowEngine">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    -->
+
+    <!-- indaba service conf -->
+    <bean id="userService" class="com.ocs.indaba.service.UserService" />
+    <bean id="targetService" class="com.ocs.indaba.service.TargetService" />
+    <bean id="viewPermissionService" class="com.ocs.indaba.service.ViewPermissionService" />
+    <bean id="organizationService" class="com.ocs.indaba.service.OrganizationService" />
+    <bean id="projectService" class="com.ocs.indaba.service.ProjectService" />
+    <bean id="projectControlPanelService" class="com.ocs.indaba.controlpanel.service.ProjectControlPanelService" />
+    <bean id="productService" class="com.ocs.indaba.service.ProductService" />
+    <bean id="productControlPanelService" class="com.ocs.indaba.controlpanel.service.ProductControlPanelService" />
+    <bean id="roleService" class="com.ocs.indaba.service.RoleService" />
+    <bean id="horseService" class="com.ocs.indaba.service.HorseService" />
+    <bean id="taskService" class="com.ocs.indaba.service.TaskService" />
+    <bean id="journalService" class="com.ocs.indaba.service.JournalService" />
+    <bean id="journalVersionService" class="com.ocs.indaba.service.JournalVersionService" />
+    <bean id="viewMatrixService" class="com.ocs.indaba.service.ViewMatrixService" />
+    <bean id="accessMatrixService" class="com.ocs.indaba.service.AccessMatrixService" />
+    <bean id="accessPermissionService" class="com.ocs.indaba.service.AccessPermissionService" />
+    <bean id="studyPeriodService" class="com.ocs.indaba.service.StudyPeriodService" />
+    <bean id="uploadFileService" class="com.ocs.indaba.service.UploadFileService" />
+    <bean id="languageService" class="com.ocs.indaba.service.LanguageService" />
+    <bean id="indicatorTagService" class="com.ocs.indaba.service.IndicatorTagService" />
+    <bean id="referenceService" class="com.ocs.indaba.service.ReferenceService" />
+    <bean id="eventService" class="com.ocs.indaba.service.EventService" />
+    <bean id="mailService" class="com.ocs.indaba.service.MailbatchService" />
+    <bean id="surveyService" class="com.ocs.indaba.service.SurveyService" />
+    <bean id="surveyConfigService" class="com.ocs.indaba.service.SurveyConfigService" />
+    <bean id="surveyCategoryService" class="com.ocs.indaba.service.SurveyCategoryService" />
+    <bean id="siteMessageService" class="com.ocs.indaba.service.SiteMessageService" />
+    <bean id="assignmentService" class="com.ocs.indaba.service.AssignmentService" />
+    <bean id="userFinderService" class="com.ocs.indaba.service.UserFinderService" />
+    <bean id="notificationItemService" class="com.ocs.indaba.service.NotificationItemService" />
+    <bean id="textResourceService" class="com.ocs.indaba.service.TextResourceService" />
+    <bean id="orgkeyService" class="com.ocs.indaba.common.Messages" />
+    <bean id="keyGenerateService" class="com.ocs.indaba.aggregation.service.OrgkeyService" />
+    <bean id="messageTagHandler" class="com.ocs.indaba.tag.MessageTagHandler" />
+    <bean id="transValidator" class="com.ocs.indaba.controlpanel.service.impl.TransValidator" />
+    <bean id="indicatorExporter" class="com.ocs.indaba.controlpanel.service.impl.IndicatorExporter" />
+    <bean id="surveyTableService" class="com.ocs.indaba.survey.table.SurveyTableService" />
+    <bean id="commPanelDefService" class="com.ocs.indaba.service.CommPanelDefService"/>
+
+    <!--spring context-->
+    <bean id="springContextUtil" class="com.ocs.util.SpringContextUtil"/>
+
+    <bean id="authFilter" class="com.ocs.filter.AuthFilter" />
+    <bean id="encodingFilter" class="com.ocs.indaba.filter.CharacterEncodingFilter" />
+</beans>
