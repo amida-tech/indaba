@@ -37,3 +37,7 @@ sh ./build.sh
 ```
 
 After successfull build, `dist` folder will have three .war files: FM31.war, ControlPanel.war and Publisher.war
+
+## License
+
+Licensed under [Apache 2.0](./LICENSE)
