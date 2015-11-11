@@ -1,6 +1,6 @@
 use staging
 
-SET @org_id = 1;
+SET @org_id = 7; -- Carter Foundation
 
 -- No way to reliablesplit by organization
 DROP TABLE IF EXISTS `mailbatch`;
@@ -95,11 +95,11 @@ INSERT INTO `notification_type` SELECT * FROM indaba.notification_type;
 -- IIII
 DROP TABLE IF EXISTS `organization`;
 CREATE TABLE IF NOT EXISTS `organization` LIKE `indaba`.`organization`;
-INSERT INTO `organization` SELECT * FROM indaba.organization WHERE id = @org_id;
+INSERT INTO `organization` SELECT * FROM indaba.organization WHERE id = @org_id or id = 1;
 
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` LIKE `indaba`.`user`;
-INSERT INTO `user` SELECT * FROM indaba.user WHERE organization_id = @org_id;
+INSERT INTO `user` SELECT * FROM indaba.user WHERE organization_id = @org_id or id = 1; -- need superuser
 
 DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` LIKE `indaba`.`project`;
@@ -597,9 +597,9 @@ INSERT INTO `journal_content_version` SELECT * FROM indaba.journal_content_versi
 \! echo 'atc_choice TODO - find a link to core tables'
 DROP TABLE IF EXISTS `atc_choice`;
 CREATE TABLE IF NOT EXISTS `atc_choice` LIKE `indaba`.`atc_choice`;
-INSERT INTO `atc_choice` SELECT * FROM indaba.atc_choice
+INSERT INTO `atc_choice` SELECT * FROM indaba.atc_choice;
 
 \! echo 'atc_choice_intl TODO - find a link to core tables'
 DROP TABLE IF EXISTS `atc_choice_intl`;
 CREATE TABLE IF NOT EXISTS `atc_choice_intl` LIKE `indaba`.`atc_choice_intl`;
-INSERT INTO `atc_choice_intl` SELECT * FROM indaba.atc_choice_intl
+INSERT INTO `atc_choice_intl` SELECT * FROM indaba.atc_choice_intl;
