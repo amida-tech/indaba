@@ -427,19 +427,19 @@ INSERT INTO `spr_component_version` SELECT * FROM indaba.spr_component_version W
 \! echo 'answer_object_float'
 DROP TABLE IF EXISTS `answer_object_float`;
 CREATE TABLE IF NOT EXISTS `answer_object_float` LIKE `indaba`.`answer_object_float`;
-INSERT INTO `answer_object_float` SELECT * FROM indaba.answer_object_float WHERE  id in (SELECT answer_object_id FROM survey_question_id_v sq JOIN indaba.survey_indicator si ON si.id = sq.survey_indicator_id JOIN indaba.survey_answer sa ON sq.id = sa.survey_question_id WHERE answer_type = 4 AND organization_id = @org_id ); -- 4 - float
+INSERT INTO `answer_object_float` SELECT * FROM indaba.answer_object_float ao WHERE ao.id in (SELECT answer_object_id FROM indaba.survey_answer sa WHERE sa.survey_question_id in (SELECT id FROM indaba.survey_question sq WHERE sq.survey_indicator_id in (SELECT id FROM indaba.survey_indicator si WHERE si.owner_org_id = 7 AND si.answer_type = 4))); -- 4 - float
 
 DROP TABLE IF EXISTS `answer_object_integer`;
 CREATE TABLE IF NOT EXISTS `answer_object_integer` LIKE `indaba`.`answer_object_integer`;
-INSERT INTO `answer_object_integer` SELECT * FROM indaba.answer_object_integer WHERE  id in (SELECT answer_object_id FROM survey_question_id_v sq JOIN indaba.survey_indicator si ON si.id = sq.survey_indicator_id JOIN indaba.survey_answer sa ON sq.id = sa.survey_question_id WHERE answer_type = 3 AND organization_id = @org_id ); -- 3 - integer
+INSERT INTO `answer_object_integer` SELECT * FROM indaba.answer_object_integer ao WHERE ao.id in (SELECT answer_object_id FROM indaba.survey_answer sa WHERE sa.survey_question_id in (SELECT id FROM indaba.survey_question sq WHERE sq.survey_indicator_id in (SELECT id FROM indaba.survey_indicator si WHERE si.owner_org_id = 7 AND si.answer_type = 3))); -- 3 - integer
 
 DROP TABLE IF EXISTS `answer_object_choice`;
 CREATE TABLE IF NOT EXISTS `answer_object_choice` LIKE `indaba`.`answer_object_choice`;
-INSERT INTO `answer_object_choice` SELECT * FROM indaba.answer_object_choice WHERE  id in (SELECT answer_object_id FROM survey_question_id_v sq JOIN indaba.survey_indicator si ON si.id = sq.survey_indicator_id JOIN indaba.survey_answer sa ON sq.id = sa.survey_question_id WHERE (answer_type = 1 OR answer_type = 2) AND organization_id = @org_id ); -- 1 - single choice, 2 - multi choice
+INSERT INTO `answer_object_choice` SELECT * FROM indaba.answer_object_choice ao WHERE ao.id in (SELECT answer_object_id FROM indaba.survey_answer sa WHERE sa.survey_question_id in (SELECT id FROM indaba.survey_question sq WHERE sq.survey_indicator_id in (SELECT id FROM indaba.survey_indicator si WHERE si.owner_org_id = 7 AND (si.answer_type = 1 OR si.answer_type = 2)))); -- 1 - single choice, 2 - multi choice
 
 DROP TABLE IF EXISTS `answer_object_text`;
 CREATE TABLE IF NOT EXISTS `answer_object_text` LIKE `indaba`.`answer_object_text`;
-INSERT INTO `answer_object_text` SELECT * FROM indaba.answer_object_text WHERE  id in (SELECT answer_object_id FROM survey_question_id_v sq JOIN indaba.survey_indicator si ON si.id = sq.survey_indicator_id JOIN indaba.survey_answer sa ON sq.id = sa.survey_question_id WHERE answer_type = 5 AND organization_id = @org_id ); -- 5 - text
+INSERT INTO `answer_object_text` SELECT * FROM indaba.answer_object_text ao WHERE ao.id in (SELECT answer_object_id FROM indaba.survey_answer sa WHERE sa.survey_question_id in (SELECT id FROM indaba.survey_question sq WHERE sq.survey_indicator_id in (SELECT id FROM indaba.survey_indicator si WHERE si.owner_org_id = 7 AND si.answer_type = 5))); -- 5 - text
 
 DROP TABLE IF EXISTS `answer_type_choice`;
 CREATE TABLE IF NOT EXISTS `answer_type_choice` LIKE `indaba`.`answer_type_choice`;
