@@ -210,11 +210,11 @@ INSERT INTO `noteobj_version_intl` SELECT * FROM indaba.noteobj_version_intl WHE
 
 DROP TABLE IF EXISTS `horse`;
 CREATE TABLE IF NOT EXISTS `horse` LIKE `indaba`.`horse`;
-INSERT INTO `horse` SELECT * FROM indaba.horse WHERE id IN (SELECT nt.horse_id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id JOIN notedef nd ON nd.product_id = pd.id JOIN noteobj nt ON nd.id = nt.notedef_id WHERE p.organization_id = @org_id);
+INSERT INTO `horse` SELECT * FROM indaba.horse h, indaba.project p, indaba.product pr WHERE p.organization_id = @org_id and p.id=pr.project_id and h.product_id=pr.id;
 
 DROP TABLE IF EXISTS `dead_horse`;
 CREATE TABLE IF NOT EXISTS `dead_horse` LIKE `indaba`.`dead_horse`;
-INSERT INTO `dead_horse` SELECT * FROM indaba.dead_horse WHERE id IN (SELECT nt.horse_id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id JOIN notedef nd ON nd.product_id = pd.id JOIN noteobj nt ON nd.id = nt.notedef_id WHERE p.organization_id = @org_id);
+INSERT INTO `dead_horse` SELECT * FROM indaba.dead_horse h, indaba.project p, indaba.product pr WHERE p.organization_id = @org_id and p.id=pr.project_id and h.product_id=pr.id;
 
 DROP TABLE IF EXISTS `workflow`;
 CREATE TABLE IF NOT EXISTS `workflow` LIKE `indaba`.`workflow`;
@@ -485,9 +485,9 @@ INSERT INTO `groupdef` SELECT * FROM indaba.groupdef WHERE product_id IN (SELECT
 \! echo 'groupdef_role'
 DROP TABLE IF EXISTS `groupdef_role`;
 CREATE TABLE IF NOT EXISTS `groupdef_role` LIKE `indaba`.`groupdef_role`;
-INSERT INTO `groupdef_role` SELECT * FROM indaba.groupdef_role WHERE groupdef_id IN (SELECT gd.id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id JOIN indaba.groupdef gd ON gd.product_id =  pd.id WHERE p.organization_id = @org_id);
+INSERT INTO `groupdef_role` SELECT * FROM indaba.groupdef_role WHERE groupdef_id IN (SELECT id FROM indaba.groupdef WHERE product_id IN (SELECT pd.id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id WHERE p.organization_id = @org_id));
 
-CREATE OR REPLACE VIEW groupdef_v AS SELECT DISTINCT gd.id, p.organization_id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id JOIN indaba.groupdef gd ON gd.product_id =  pd.id
+CREATE OR REPLACE VIEW groupdef_v AS SELECT DISTINCT gd.id, p.organization_id FROM indaba.project p JOIN indaba.product pd ON p.id = pd.project_id JOIN indaba.groupdef gd ON gd.product_id = pd.id;
 
 \! echo 'groupdef_user'
 DROP TABLE IF EXISTS `groupdef_user`;
