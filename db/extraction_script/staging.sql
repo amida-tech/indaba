@@ -210,11 +210,12 @@ INSERT INTO `noteobj_version_intl` SELECT * FROM indaba.noteobj_version_intl WHE
 
 DROP TABLE IF EXISTS `horse`;
 CREATE TABLE IF NOT EXISTS `horse` LIKE `indaba`.`horse`;
-INSERT INTO `horse` SELECT * FROM indaba.horse h, indaba.project p, indaba.product pr WHERE p.organization_id = @org_id and p.id=pr.project_id and h.product_id=pr.id;
+INSERT INTO `horse` SELECT * FROM indaba.horse h where h.product_id in (SELECT id FROM indaba.product WHERE project_id in (SELECT id FROM indaba.project WHERE organization_id = @org_id));
+
 
 DROP TABLE IF EXISTS `dead_horse`;
 CREATE TABLE IF NOT EXISTS `dead_horse` LIKE `indaba`.`dead_horse`;
-INSERT INTO `dead_horse` SELECT * FROM indaba.dead_horse h, indaba.project p, indaba.product pr WHERE p.organization_id = @org_id and p.id=pr.project_id and h.product_id=pr.id;
+INSERT INTO `dead_horse` SELECT * FROM indaba.dead_horse h where h.product_id in (SELECT id FROM indaba.product WHERE project_id in (SELECT id FROM indaba.project WHERE organization_id = @org_id));
 
 DROP TABLE IF EXISTS `workflow`;
 CREATE TABLE IF NOT EXISTS `workflow` LIKE `indaba`.`workflow`;
