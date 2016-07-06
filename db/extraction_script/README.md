@@ -21,3 +21,13 @@ mysqldump staging > staging.sql
 ```
 
 Staging database will be recreated each run of script.
+
+## Extract single client file paths
+
+1. Open `attachment.sql`.
+2. Replace `1` in `SET @org_id = 1;` to desired organization id and save file.
+3. Run myslq shell.
+4. Run `attachment.sql`.
+5. The script will create a file at /tmp/attachments.csv. Each line has the file path of a file uploaded by a user of the selected organization.
+You can change this file by editing the `INTO OUTFILE` field defined in `attachment.sql`.
+
