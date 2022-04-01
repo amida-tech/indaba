@@ -3,7 +3,7 @@
 
 Indaba is a collaborative content creation and publishing platform. It consists of the following systems:
 
-- Field Manager (a.k.a. Builder) – this system is used by field workers to collaboratively create content based on pre-defined project configuration. 
+- Field Manager (a.k.a. Builder) – this system is used by field workers to collaboratively create content based on pre-defined project configuration.
 
 - Indaba Admin – this system is used by system admins to manage the Indaba Platform. Main functions include: manage user accounts, manage platform resources, create/configure projects, and manage project executions.
 
@@ -28,9 +28,9 @@ Folder `legacy` contains original source code of Indaba Platform.
 
 ### Build
 
-Prerequisites: Java, Ant
+Prerequisites: Java, Ant, GlassFish, NetBeans
 
-Run build: 
+Run build:
 
 ```
 sh ./build.sh
